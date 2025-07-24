@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=4 uid="uid://nf16xwt1cenj"]
+
+[ext_resource type="Texture2D" uid="uid://chovptpojor6" path="res://assets/tileset.png" id="1_vqaso"]
+[ext_resource type="PackedScene" uid="uid://26ljsnexi04d" path="res://player.tscn" id="2_uuaxm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c3an2"]
+texture = ExtResource("1_vqaso")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(24, -24, 22.2837, -24, 22.0286, 24, 24, 24)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-22.0529, -24, -24, -24, -24, 24, -22.0455, 24)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, 21.9451, 24, 22.203, -22.057, -24, -22.0434)
+1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-24, 21.9639, -22.0625, 21.9639, -22.1141, 24, -24, 24)
+
+[sub_resource type="TileSet" id="TileSet_vjcy3"]
+tile_size = Vector2i(48, 48)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_c3an2")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAALAAkAAAAAAAAAAAALAAgAAAAAAAAAAAALAAcAAAAAAAAAAAALAAYAAAAAAAAAAAALAAUAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAALAAIAAAAAAAAAAAALAAEAAAABAAAAAAAKAAEAAAAAAAAAAFAJAAEAAAAAAAAAAFAIAAEAAAABAAAAAGAIAAIAAAABAAAAADAJAAIAAAAAAAAAAFAKAAIAAAABAAAAAAAKAAMAAAABAAAAAFAJAAMAAAAAAAAAAFAIAAMAAAAAAAAAAFAHAAMAAAAAAAAAAFAGAAQAAAAAAAAAADAGAAIAAAAAAAAAADAFAAMAAAAAAAAAAGAGAAEAAAABAAAAAAAFAAEAAAAAAAAAAFAEAAEAAAABAAAAAGAEAAIAAAAAAAAAAAAGAAUAAAABAAAAAFAFAAUAAAAAAAAAAFAEAAUAAAABAAAAADAEAAQAAAAAAAAAAAALAAoAAAABAAAAAFAKAAoAAAAAAAAAAFAJAAoAAAAAAAAAAFAIAAoAAAAAAAAAAFAHAAoAAAAAAAAAAFAGAAoAAAAAAAAAAFADAAMAAAAAAAAAAFACAAMAAAABAAAAAGACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAkAAAAAAAAAAAAFAAoAAAAAAAAAAFAEAAoAAAAAAAAAAFADAAoAAAAAAAAAAFACAAoAAAABAAAAADA=")
+tile_set = SubResource("TileSet_vjcy3")
+
+[node name="Player" parent="." instance=ExtResource("2_uuaxm")]
+position = Vector2(552, 498)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(10, 10)
