@@ -1,17 +1,20 @@
-[gd_scene load_steps=4 format=4 uid="uid://8c68pgr3marj"]
+[gd_scene load_steps=5 format=4 uid="uid://8c68pgr3marj"]
 
 [ext_resource type="Texture2D" uid="uid://chovptpojor6" path="res://assets/tileset.png" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://26ljsnexi04d" path="res://player.tscn" id="2_vonw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 tile_size = Vector2i(48, 48)
+physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_vonw3")
 
 [node name="Level" type="Node2D"]
@@ -19,3 +22,6 @@ sources/1 = SubResource("TileSetAtlasSource_vonw3")
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAOAAkAAQAAAAAAAAAOAAgAAQAAAAAAAAAOAAcAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAUAAQABAAAAAAANAAUAAQAAAAEAAAANAAYAAQAAAAAAAAANAAcAAQAAAAAAAAANAAgAAQAAAAAAAAANAAkAAQAAAAAAAAANAAoAAQAAAAEAAAAOAAoAAQABAAAAAFANAAQAAQABAAAAAAANAAsAAQABAAAAAFAMAAsAAQABAAAAADAMAAQAAQABAAAAAGAMAAUAAQAAAAEAAAAMAAoAAQAAAAEAAAAMAAYAAQABAAEAAAAMAAkAAQABAAEAADALAAoAAQAAAAAAAFAKAAoAAQAAAAAAAFALAAUAAQAAAAAAAFAKAAUAAQAAAAAAAFAJAAUAAQAAAAAAAFAIAAUAAQABAAAAAGAIAAYAAQABAAAAADAJAAYAAQAAAAAAAFAJAAcAAQAAAAAAAFAJAAgAAQAAAAAAAFAJAAkAAQAAAAAAAFAKAAYAAQABAAAAAAAKAAgAAQABAAAAAAAIAAcAAQABAAAAAGAIAAkAAQABAAAAAGAIAAgAAQABAAAAADAIAAoAAQABAAAAADAKAAkAAQABAAAAAFAKAAcAAQABAAAAAFAJAAoAAQAAAAAAAFA=")
 tile_set = SubResource("TileSet_oi3di")
+
+[node name="Player" parent="." instance=ExtResource("2_vonw3")]
+position = Vector2(600, 328)

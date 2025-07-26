@@ -1,39 +1,22 @@
-extends Area2D
-
-@export var speed = 400
-var screen_size
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	screen_size = get_viewport_rect().size
+extends CharacterBody2D
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play()
+const SPEED = 300.0
+
+
+func _physics_process(delta: float) -> void:
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var horizontal_direction := Input.get_axis("ui_left", "ui_right")
+	if horizontal_direction:
+		velocity.x = horizontal_direction * SPEED
 	else:
-		$AnimatedSprite2D.stop()
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-	
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		# See the note below about the following boolean assignment.
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "up"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
+	var vertical_direction := Input.get_axis("ui_up", "ui_down")
+	if vertical_direction:
+		velocity.y = vertical_direction * SPEED
+	else:
+		velocity.y = move_toward(velocity.y, 0, SPEED)
+
+	move_and_slide()
