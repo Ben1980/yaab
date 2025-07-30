@@ -7,10 +7,18 @@
 texture = ExtResource("1_u52ul")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -24, 24, -21.7214, 24, -21.842, -24)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(21.5919, -24, 20.9128, 24, 24, 24, 24, -24)
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, 22.0694, -22.0649, 22.088, -22.0835, 24, -24, 24)
+1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, 22.0352, 24, 22.0827, -22.0493, -24, -21.9281)
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -22.193, -24, -22.1397, -22.0628, -24, -22.0628)
+0:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(22.1276, -24, 24, -24, 24, -22.1368, 22.1632, -22.1013)
+0:1/0/physics_layer_0/polygon_2/points = PackedVector2Array(-24, 22.0095, -21.993, 22.0273, -22.0464, 24, -24, 24)
+0:1/0/physics_layer_0/polygon_3/points = PackedVector2Array(21.9775, 21.9817, 24, 22.0173, 24, 24, 21.9597, 24)
 1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -24, 24, 24, 24, 24, -24, 22.0735, -24, 22.0116, 22.023, -22.0351, 22.0137, -22.1062, -24)
 
 [sub_resource type="TileSet" id="TileSet_oi3di"]
 tile_size = Vector2i(48, 48)
@@ -25,3 +33,6 @@ tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." instance=ExtResource("2_vonw3")]
 position = Vector2(600, 328)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(10, 10)
