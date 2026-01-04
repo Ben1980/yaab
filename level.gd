@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene
+var enemy_scene: PackedScene
 @export var enemy_count: int = 5
 
 # Called when the node enters the scene tree for the first time.
