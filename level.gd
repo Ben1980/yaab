@@ -26,7 +26,6 @@ func is_position_valid(pos: Vector2) -> bool:
 func spawn_enemies():
 	var floor_layer: TileMapLayer = $Floor
 	var used_cells = floor_layer.get_used_cells()
-	#var half_tile = Vector2(24, 24)  # 48/2
 	
 	var spawned = 0
 	var max_attempts = enemy_count * 20
