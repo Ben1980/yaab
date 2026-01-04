@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cac3j3wbqgewd"]
+[gd_scene load_steps=5 format=3 uid="uid://cac3j3wbqgewd"]
 
 [ext_resource type="Texture2D" uid="uid://dsutvitiakw21" path="res://assets/enemy_idle.png" id="1_4gyqm"]
+[ext_resource type="Script" uid="uid://eabnhq7msque" path="res://enemy.gd" id="1_qi2p4"]
 [ext_resource type="Texture2D" uid="uid://0qm61hjxp0v2" path="res://assets/enemy_walk.png" id="2_qi2p4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iifgy"]
@@ -22,11 +23,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_qi2p4")
+patrol_speed = 20.0
+chase_speed = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iifgy")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -5, 5, 0, 0, 5, -5, 0)
