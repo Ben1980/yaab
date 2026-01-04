@@ -38,4 +38,4 @@ position = Vector2(600, 328)
 SPEED = 30
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(10, 10)
+zoom = Vector2(5, 5)

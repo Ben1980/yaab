@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var SPEED = 1
 
 
+var is_dead: bool = false
+
+
 func get_input():
 	look_at(get_global_mouse_position())
 	rotation += PI/2
@@ -15,4 +18,14 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
-	
+
+
+func _ready():
+	add_to_group("player")
+
+
+func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	get_tree().reload_current_scene()
