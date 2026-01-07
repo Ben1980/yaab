@@ -37,6 +37,7 @@ func die() -> void:
 
 func fire() -> void:
 	var laser = laser_scene.instantiate()
+	laser.direction = (get_global_mouse_position() - global_position).normalized()
 	laser.global_position = global_position
-	laser.rotation = rotation
+	laser.rotation = rotation - PI
 	get_parent().add_child(laser)
