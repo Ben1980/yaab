@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi8tajhmlxdow"]
+
+[ext_resource type="Script" uid="uid://clfnh8xmokg4j" path="res://laser.gd" id="1_fn5yt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_div1a"]
+size = Vector2(2, 19)
+
+[node name="Laser" type="Area2D"]
+collision_mask = 5
+script = ExtResource("1_fn5yt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 9.5)
+shape = SubResource("RectangleShape2D_div1a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 2.0
+offset_bottom = 19.0
+color = Color(1, 0, 0, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

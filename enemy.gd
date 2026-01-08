@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 
-@export var patrol_speed: float = 30.0
-@export var chase_speed: float = 60.0
-@export var vision_range: float = 150.0
-@export var direction_change_time: float = 2.0 
+@export var PATROL_SPEED: float = 30.0
+@export var CHASE_SPEED: float = 60.0
+@export var VISION_RANGE: float = 150.0
+@export var DIRECTION_CHANGE_TIME: float = 2.0 
 
 
 enum State { PATROL, CHASE }
@@ -20,11 +20,11 @@ var last_known_player_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("enemy")
-	call_deferred("actor_setup")
+	call_deferred("player_setup")
 
 
 func _physics_process(delta: float) -> void:
-	if player == null:
+	if player == null || !is_instance_valid(player):
 		return
 	
 	var can_see_player = check_line_of_sight()
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	check_player_collision()
 
 
-func actor_setup() -> void:
+func player_setup() -> void:
 	await get_tree().physics_frame
 	player = get_tree().get_first_node_in_group("player")
 	pick_random_patrol_direction()
@@ -56,7 +56,7 @@ func actor_setup() -> void:
 
 func check_line_of_sight() -> bool:
 	var distance_to_player = global_position.distance_to(player.global_position)
-	if distance_to_player > vision_range:
+	if distance_to_player > VISION_RANGE:
 		return false
 	
 	var space_state = get_world_2d().direct_space_state
@@ -73,11 +73,11 @@ func check_line_of_sight() -> bool:
 
 func patrol_behavior(delta: float) -> void:
 	patrol_timer += delta
-	if patrol_timer >= direction_change_time:
+	if patrol_timer >= DIRECTION_CHANGE_TIME:
 		patrol_timer = 0.0
 		pick_random_patrol_direction()
 	
-	velocity = patrol_direction * patrol_speed
+	velocity = patrol_direction * PATROL_SPEED
 
 
 func chase_behavior() -> void:
@@ -90,7 +90,7 @@ func chase_behavior() -> void:
 		pick_random_patrol_direction()
 		return
 	
-	velocity = global_position.direction_to(target_pos) * chase_speed
+	velocity = global_position.direction_to(target_pos) * CHASE_SPEED
 
 
 func pick_random_patrol_direction() -> void:
@@ -123,3 +123,7 @@ func check_player_collision() -> void:
 		var collider = collision.get_collider()
 		if collider.is_in_group("player") and collider.has_method("die"):
 			collider.die()
+
+
+func die() -> void:
+	queue_free()
