@@ -34,3 +34,7 @@ animation = &"idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-5.5, 2.5, 5.5, 2.5, 0, -3)
+
+[node name="FireCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]

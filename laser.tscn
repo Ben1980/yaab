@@ -6,8 +6,8 @@
 size = Vector2(2, 19)
 
 [node name="Laser" type="Area2D"]
+collision_mask = 5
 script = ExtResource("1_fn5yt")
-speed = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 9.5)
@@ -17,3 +17,8 @@ shape = SubResource("RectangleShape2D_div1a")
 offset_right = 2.0
 offset_bottom = 19.0
 color = Color(1, 0, 0, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

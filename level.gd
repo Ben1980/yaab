@@ -1,17 +1,12 @@
 extends Node2D
 
-var enemy_scene: PackedScene
 @export var enemy_count: int = 5
+
+const ENEMY_SCENE: PackedScene = preload("res://enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy_scene = preload("res://enemy.tscn")
 	call_deferred("spawn_enemies")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func is_position_valid(pos: Vector2) -> bool:
@@ -23,7 +18,7 @@ func is_position_valid(pos: Vector2) -> bool:
 	return space_state.intersect_point(query).is_empty()
 
 
-func spawn_enemies():
+func spawn_enemies() -> void:
 	var floor_layer: TileMapLayer = $Floor
 	var used_cells = floor_layer.get_used_cells()
 	
@@ -40,7 +35,7 @@ func spawn_enemies():
 		var spawn_pos = tile_center + offset
 		
 		if is_position_valid(spawn_pos):
-			var enemy = enemy_scene.instantiate()
+			var enemy = ENEMY_SCENE.instantiate()
 			enemy.position = spawn_pos
 			add_child(enemy)
 			spawned += 1
