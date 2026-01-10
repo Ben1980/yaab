@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-@export var SPEED: float = 30
-@export var COOLDOWN_TIME: float = 0.2
-@export var CONTROLLER_DEADZONE: float = 0.1
+@export var speed: float = 30
+@export var cooldown_time: float = 0.2
+@export var controller_deadzone: float = 0.1
 
 
 var aim_direction: Vector2 = Vector2.RIGHT
@@ -24,7 +24,7 @@ const LASER_SCENE: PackedScene = preload("res://laser.tscn")
 func get_input() -> void:
 	if controller_available:
 		var stick_aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
-		if stick_aim.length() > CONTROLLER_DEADZONE:
+		if stick_aim.length() > controller_deadzone:
 			using_controller = true
 			aim_direction = stick_aim.normalized()
 			rotation = aim_direction.angle() + PI/2
@@ -46,17 +46,17 @@ func get_input() -> void:
 		
 		var speed_factor = clamp(raw_length / observed_stick_max, 0.0, 1.0)
 		
-		if raw_length > CONTROLLER_DEADZONE:
-			velocity = aim_direction * speed_factor * SPEED
+		if raw_length > controller_deadzone:
+			velocity = aim_direction * speed_factor * speed
 		else:
 			velocity = Vector2.ZERO
 	else:
 		var forward_input = Input.get_axis("move_down", "move_up")
-		velocity = -transform.y.normalized() * forward_input * SPEED
+		velocity = -transform.y.normalized() * forward_input * speed
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		if not controller_available or Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").length() < CONTROLLER_DEADZONE:
+		if not controller_available or Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").length() < controller_deadzone:
 			using_controller = false
 	
 	if Input.is_action_pressed("shoot"):
@@ -100,7 +100,7 @@ func fire() -> void:
 	laser.global_position = global_position
 	laser.rotation = rotation - PI
 	get_parent().add_child(laser)
-	fire_cooldown.start(COOLDOWN_TIME)
+	fire_cooldown.start(cooldown_time)
 
 
 func _on_fire_cooldown_timeout() -> void:
