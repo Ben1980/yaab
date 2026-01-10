@@ -12,6 +12,7 @@ var can_fire: bool = true
 var controller_available: bool = false
 var using_controller: bool = false
 var observed_stick_max: float = 0.7
+var player_speed_factor: float = 1.0
 
 
 const LASER_SCENE: PackedScene = preload("res://laser.tscn")
@@ -44,7 +45,7 @@ func get_input() -> void:
 		if raw_length > observed_stick_max:
 			observed_stick_max = raw_length
 		
-		var speed_factor = clamp(raw_length / observed_stick_max, 0.0, 1.0)
+		var speed_factor = clamp(raw_length / observed_stick_max, 0.0, 1.0) * player_speed_factor
 		
 		if raw_length > controller_deadzone:
 			velocity = aim_direction * speed_factor * speed
@@ -52,12 +53,19 @@ func get_input() -> void:
 			velocity = Vector2.ZERO
 	else:
 		var forward_input = Input.get_axis("move_down", "move_up")
-		velocity = -transform.y.normalized() * forward_input * speed
+		velocity = -transform.y.normalized() * forward_input * speed * player_speed_factor
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		if not controller_available or Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down").length() < controller_deadzone:
 			using_controller = false
+	
+	if event.is_action_pressed("player_run"):
+		player_speed_factor = 2.1
+	
+	if event.is_action_released("player_run"):
+		player_speed_factor = 1.0
 	
 	if Input.is_action_pressed("shoot"):
 		fire()
