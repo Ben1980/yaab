@@ -4,7 +4,6 @@
 ### Godot ###
 # Godot 4+ specific ignores
 .godot/
-export/
 
 # Godot-specific ignores
 .import/
@@ -54,6 +53,4 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,macos
 
-CLAUDE.md
 recordings/
-opencode.json
