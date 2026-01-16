@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://btg3b5w16cd3v"
+path="res://.godot/imported/alien_walk_cycle.aseprite-600cc73e42210a7e0071658ebc846745.res"
+
+[deps]
+
+source_file="res://assets/alien_walk_cycle.aseprite"
+dest_files=["res://.godot/imported/alien_walk_cycle.aseprite-600cc73e42210a7e0071658ebc846745.res"]
+
+[params]
+
