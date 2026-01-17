@@ -21,12 +21,12 @@ func get_input() -> void:
 	velocity = (forward + strafe).normalized() * SPEED
 	
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("shoot"):
 		fire()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	get_input()
 	update_animation()
 	move_and_slide()
