@@ -12,18 +12,21 @@ const LASER_SCENE: PackedScene = preload("res://laser.tscn")
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_cooldown: Timer = $FireCooldown
 
+signal game_over
 
 func get_input() -> void:
-	look_at(get_global_mouse_position())
-	rotation += PI/2
-	var forward = transform.y.normalized() * -Input.get_axis("move_down", "move_up")
-	var strafe = transform.x.normalized() * Input.get_axis("move_left", "move_right")
-	velocity = (forward + strafe).normalized() * SPEED
+	if not is_dead:
+		look_at(get_global_mouse_position())
+		rotation += PI/2
+		var forward = transform.y.normalized() * -Input.get_axis("move_down", "move_up")
+		var strafe = transform.x.normalized() * Input.get_axis("move_left", "move_right")
+		velocity = (forward + strafe).normalized() * SPEED
 	
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("shoot"):
-		fire()
+	if not is_dead:
+		if Input.is_action_pressed("shoot"):
+			fire()
 
 
 func _physics_process(_delta: float) -> void:
@@ -47,7 +50,7 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	get_tree().reload_current_scene()
+	emit_signal("game_over")
 
 
 func fire() -> void:

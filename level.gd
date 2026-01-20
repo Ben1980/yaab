@@ -4,6 +4,8 @@ extends Node2D
 
 const ENEMY_SCENE: PackedScene = preload("res://enemy.tscn")
 
+@onready var game_over_screen: Control = $GameOverLayer/GameOverScreen
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	call_deferred("spawn_enemies")
@@ -39,3 +41,13 @@ func spawn_enemies() -> void:
 			enemy.position = spawn_pos
 			add_child(enemy)
 			spawned += 1
+
+
+func _on_player_game_over() -> void:
+	game_over_screen.show()
+	get_tree().paused = true
+
+
+func _on_restart_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()

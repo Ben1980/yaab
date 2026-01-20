@@ -38,3 +38,41 @@ position = Vector2(600, 328)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
+
+[node name="GameOverLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="GameOverScreen" type="Control" parent="GameOverLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOverLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer/GameOverScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="GaneOver" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+
+[node name="Restart" type="Button" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
+[connection signal="pressed" from="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
