@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-@export var SPEED: float = 30
-@export var COOLDOWN_TIME: float = 0.2
+@export var speed: float = 30
+@export var cooldown_time: float = 0.2
 
 var is_dead: bool = false
 var can_fire: bool = true
@@ -20,7 +20,7 @@ func get_input() -> void:
 		rotation += PI/2
 		var forward = transform.y.normalized() * -Input.get_axis("move_down", "move_up")
 		var strafe = transform.x.normalized() * Input.get_axis("move_left", "move_right")
-		velocity = (forward + strafe).normalized() * SPEED
+		velocity = (forward + strafe).normalized() * speed
 	
 
 func _input(_event: InputEvent) -> void:
@@ -30,6 +30,9 @@ func _input(_event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if is_dead:
+		return
+	
 	get_input()
 	update_animation()
 	move_and_slide()
@@ -50,7 +53,7 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
-	emit_signal("game_over")
+	game_over.emit()
 
 
 func fire() -> void:
@@ -64,7 +67,7 @@ func fire() -> void:
 	laser.global_position = global_position
 	laser.rotation = rotation - PI
 	get_parent().add_child(laser)
-	fire_cooldown.start(COOLDOWN_TIME)
+	fire_cooldown.start(cooldown_time)
 
 
 func _on_fire_cooldown_timeout() -> void:

@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 
-@export var PATROL_SPEED: float = 30.0
-@export var CHASE_SPEED: float = 60.0
-@export var VISION_RANGE: float = 150.0
-@export var DIRECTION_CHANGE_TIME: float = 2.0 
+@export var patrol_speed: float = 30.0
+@export var chase_speed: float = 60.0
+@export var vision_range: float = 150.0
+@export var direction_change_time: float = 2.0 
 
 
 enum State { PATROL, CHASE }
@@ -25,6 +25,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if player == null || !is_instance_valid(player):
+		velocity = Vector2.ZERO
 		return
 	
 	var can_see_player = check_line_of_sight()
@@ -56,7 +57,7 @@ func player_setup() -> void:
 
 func check_line_of_sight() -> bool:
 	var distance_to_player = global_position.distance_to(player.global_position)
-	if distance_to_player > VISION_RANGE:
+	if distance_to_player > vision_range:
 		return false
 	
 	var space_state = get_world_2d().direct_space_state
@@ -73,11 +74,11 @@ func check_line_of_sight() -> bool:
 
 func patrol_behavior(delta: float) -> void:
 	patrol_timer += delta
-	if patrol_timer >= DIRECTION_CHANGE_TIME:
+	if patrol_timer >= direction_change_time:
 		patrol_timer = 0.0
 		pick_random_patrol_direction()
 	
-	velocity = patrol_direction * PATROL_SPEED
+	velocity = patrol_direction * patrol_speed
 
 
 func chase_behavior() -> void:
@@ -90,7 +91,7 @@ func chase_behavior() -> void:
 		pick_random_patrol_direction()
 		return
 	
-	velocity = global_position.direction_to(target_pos) * CHASE_SPEED
+	velocity = global_position.direction_to(target_pos) * chase_speed
 
 
 func pick_random_patrol_direction() -> void:

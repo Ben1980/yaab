@@ -62,7 +62,7 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer/GameOverScreen/CenterContainer"]
 layout_mode = 2
 
-[node name="GaneOver" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+[node name="GameOver" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "GAME OVER"
 
