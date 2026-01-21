@@ -56,6 +56,9 @@ func player_setup() -> void:
 
 
 func check_line_of_sight() -> bool:
+	if player == null || !is_instance_valid(player):
+		return false
+		
 	var distance_to_player = global_position.distance_to(player.global_position)
 	if distance_to_player > vision_range:
 		return false
