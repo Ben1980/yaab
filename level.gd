@@ -1,10 +1,13 @@
 extends Node2D
 
 @export var enemy_count: int = 5
+@export var color_transition_duration: float = 0.75
 
 const ENEMY_SCENE: PackedScene = preload("res://enemy.tscn")
 
 @onready var game_over_screen: Control = $GameOverLayer/GameOverScreen
+@onready var restart_button: Button = $GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Restart
+@onready var quit_button: Button = $GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Quit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,8 +48,16 @@ func spawn_enemies() -> void:
 
 func _on_player_game_over() -> void:
 	game_over_screen.show()
+	restart_button.hide()
+	quit_button.hide()
 	get_tree().paused = true
-
+	
+	var tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property($GameOverLayer/GameOverScreen/ColorRect, "modulate",  Color(0,0,0, 0.7), 0)
+	tween.tween_property($GameOverLayer/GameOverScreen/ColorRect, "modulate",  Color(0.5,0,0, 0.8), color_transition_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(restart_button.show)
+	tween.tween_callback(quit_button.show)
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
