@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dafsydkqkb7by"
-path="res://.godot/imported/gitHub_Invertocat_White.svg-eb2591980efe36591a9b28e7a6c1451e.ctex"
+uid="uid://chk540n01g6p7"
+path="res://.godot/imported/enemy_walk.png-975ad02b1a2f94df3bb8e1af12522077.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://website/assets/gitHub_Invertocat_White.svg"
-dest_files=["res://.godot/imported/gitHub_Invertocat_White.svg-eb2591980efe36591a9b28e7a6c1451e.ctex"]
+source_file="res://characters/enemies/sprites/enemy_walk.png"
+dest_files=["res://.godot/imported/enemy_walk.png-975ad02b1a2f94df3bb8e1af12522077.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

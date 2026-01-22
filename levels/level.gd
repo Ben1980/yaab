@@ -5,7 +5,7 @@ extends Node2D
 @export var color_transition_duration: float = 0.75
 
 
-const ENEMY_SCENE: PackedScene = preload("res://enemy.tscn")
+const ENEMY_SCENE: PackedScene = preload("res://characters/enemies/enemy.tscn")
 
 
 @onready var game_over_screen: Control = $GameOverLayer/GameOverScreen
@@ -67,3 +67,7 @@ func _on_player_game_over() -> void:
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+
+func _on_quit_pressed() -> void:
+	pass # Replace with function body.

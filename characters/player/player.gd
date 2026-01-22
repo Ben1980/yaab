@@ -9,7 +9,7 @@ var is_dead: bool = false
 var can_fire: bool = true
 
 
-const LASER_SCENE: PackedScene = preload("res://laser.tscn")
+const LASER_SCENE: PackedScene = preload("res://weapons/laser.tscn")
 
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D

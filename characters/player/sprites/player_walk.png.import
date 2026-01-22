@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjyeb3tbnihg5"
-path="res://.godot/imported/alien_walk_cycle.png-dd1a9e264f0b38aba545191f469f82ec.ctex"
+uid="uid://cfkkftky3o5gu"
+path="res://.godot/imported/player_walk.png-6ebdf2d8252b599d5f9e31f75ff504f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/alien_walk_cycle.png"
-dest_files=["res://.godot/imported/alien_walk_cycle.png-dd1a9e264f0b38aba545191f469f82ec.ctex"]
+source_file="res://characters/player/sprites/player_walk.png"
+dest_files=["res://.godot/imported/player_walk.png-6ebdf2d8252b599d5f9e31f75ff504f4.ctex"]
 
 [params]
 

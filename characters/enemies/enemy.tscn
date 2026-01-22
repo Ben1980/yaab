@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://cac3j3wbqgewd"]
 
-[ext_resource type="Script" uid="uid://eabnhq7msque" path="res://enemy.gd" id="1_qi2p4"]
-[ext_resource type="Texture2D" uid="uid://bjyeb3tbnihg5" path="res://assets/sprites/alien_walk_cycle.png" id="2_4gyqm"]
+[ext_resource type="Script" uid="uid://eabnhq7msque" path="res://characters/enemies/enemy.gd" id="1_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://ct7ct26rv5umk" path="res://characters/enemies/sprites/alien_walk_cycle.png" id="2_4gyqm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
 atlas = ExtResource("2_4gyqm")

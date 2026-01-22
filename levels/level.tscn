@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://8c68pgr3marj"]
 
-[ext_resource type="Script" uid="uid://4cc3otgw4eqi" path="res://level.gd" id="1_oi3di"]
-[ext_resource type="Texture2D" uid="uid://d3vgot12v3wwo" path="res://assets/tileset.png" id="1_u52ul"]
-[ext_resource type="PackedScene" uid="uid://26ljsnexi04d" path="res://player.tscn" id="2_vonw3"]
+[ext_resource type="Script" uid="uid://4cc3otgw4eqi" path="res://levels/level.gd" id="1_oi3di"]
+[ext_resource type="Texture2D" uid="uid://d3vgot12v3wwo" path="res://levels/sprites/tileset.png" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://26ljsnexi04d" path="res://characters/player/player.tscn" id="2_vonw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -87,3 +87,4 @@ text = "Quit"
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
