@@ -4,15 +4,20 @@ extends CharacterBody2D
 @export var speed: float = 30
 @export var cooldown_time: float = 0.2
 
+
 var is_dead: bool = false
 var can_fire: bool = true
 
+
 const LASER_SCENE: PackedScene = preload("res://laser.tscn")
+
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_cooldown: Timer = $FireCooldown
 
+
 signal game_over
+
 
 func get_input() -> void:
 	if not is_dead:
