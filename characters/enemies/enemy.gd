@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @export var patrol_speed: float = 30.0
-@export var chase_speed: float = 60.0
+@export var chase_speed: float = 90.0
 @export var vision_range: float = 150.0
 @export var direction_change_time: float = 2.0 
 @export var velocity_threshold: float = 1.0
