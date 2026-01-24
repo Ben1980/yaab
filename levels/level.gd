@@ -20,6 +20,11 @@ func _ready() -> void:
 	call_deferred("spawn_enemies")
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action("ui_cancel"):
+		_on_quit_pressed()
+
+
 func is_position_valid(pos: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsPointQueryParameters2D.new()
