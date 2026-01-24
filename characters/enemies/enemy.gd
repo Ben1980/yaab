@@ -20,6 +20,9 @@ var last_known_player_pos: Vector2 = Vector2.ZERO
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
+signal enemy_died
+
+
 func _ready() -> void:
 	add_to_group("enemy")
 	call_deferred("player_setup")
@@ -135,4 +138,5 @@ func check_player_collision() -> void:
 
 
 func die() -> void:
+	enemy_died.emit()
 	queue_free()
