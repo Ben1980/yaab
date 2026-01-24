@@ -62,6 +62,7 @@ func _on_player_game_over() -> void:
 	tween.tween_property($GameOverLayer/GameOverScreen/ColorRect, "modulate",  Color(0.5,0,0, 0.8), color_transition_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(restart_button.show).set_delay(1)
 	tween.tween_callback(quit_button.show)
+	tween.tween_callback(restart_button.grab_focus)
 
 
 func _on_restart_pressed() -> void:
