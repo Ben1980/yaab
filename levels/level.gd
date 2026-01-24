@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enemy_count: int = 5
 @export var color_transition_duration: float = 0.75
-@export var save_radius: float = 100
+@export var save_radius: float = 200
 
 var query: PhysicsPointQueryParameters2D = null
 
