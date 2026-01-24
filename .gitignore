@@ -6,7 +6,7 @@
 .godot/
 
 # Godot-specific ignores
-.import/
+#.import/
 export.cfg
 export_presets.cfg
 
@@ -53,6 +53,3 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,macos
 
-CLAUDE.md
-recordings/
-opencode.json

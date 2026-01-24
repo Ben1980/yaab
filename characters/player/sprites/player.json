@@ -1,0 +1,306 @@
+{ "frames": {
+   "Player Walk 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 1.aseprite": {
+    "frame": { "x": 44, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 2.aseprite": {
+    "frame": { "x": 88, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 3.aseprite": {
+    "frame": { "x": 132, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 4.aseprite": {
+    "frame": { "x": 176, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 5.aseprite": {
+    "frame": { "x": 220, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 6.aseprite": {
+    "frame": { "x": 264, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 7.aseprite": {
+    "frame": { "x": 308, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 8.aseprite": {
+    "frame": { "x": 352, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 9.aseprite": {
+    "frame": { "x": 396, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 10.aseprite": {
+    "frame": { "x": 440, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 11.aseprite": {
+    "frame": { "x": 484, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 12.aseprite": {
+    "frame": { "x": 528, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 13.aseprite": {
+    "frame": { "x": 572, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 14.aseprite": {
+    "frame": { "x": 616, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 15.aseprite": {
+    "frame": { "x": 660, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 16.aseprite": {
+    "frame": { "x": 704, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 17.aseprite": {
+    "frame": { "x": 748, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 18.aseprite": {
+    "frame": { "x": 792, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 19.aseprite": {
+    "frame": { "x": 836, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 20.aseprite": {
+    "frame": { "x": 880, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 21.aseprite": {
+    "frame": { "x": 924, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 22.aseprite": {
+    "frame": { "x": 968, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 23.aseprite": {
+    "frame": { "x": 1012, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 24.aseprite": {
+    "frame": { "x": 1056, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 25.aseprite": {
+    "frame": { "x": 1100, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 26.aseprite": {
+    "frame": { "x": 1144, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 27.aseprite": {
+    "frame": { "x": 1188, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 28.aseprite": {
+    "frame": { "x": 1232, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 29.aseprite": {
+    "frame": { "x": 1276, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 30.aseprite": {
+    "frame": { "x": 1320, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 31.aseprite": {
+    "frame": { "x": 1364, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 32.aseprite": {
+    "frame": { "x": 1408, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 33.aseprite": {
+    "frame": { "x": 1452, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 34.aseprite": {
+    "frame": { "x": 1496, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   },
+   "Player Walk 35.aseprite": {
+    "frame": { "x": 1540, "y": 0, "w": 44, "h": 46 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 20, "w": 42, "h": 44 },
+    "sourceSize": { "w": 47, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.16.1-arm64",
+  "image": "player.png",
+  "format": "RGBA8888",
+  "size": { "w": 1584, "h": 46 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

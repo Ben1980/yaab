@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YAAB - Yet Another Alien Breed. A top-down alien shooter fan game inspired by the classic Amiga game Alien Breed by Team17.">
+  <title>YAAB - Yet Another Alien Breed</title>
+  
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/favicon.ico">
+  
+  <link rel="canonical" href="https://yaab.io/">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yaab.io/">
+  <meta property="og:title" content="YAAB - Yet Another Alien Breed">
+  <meta property="og:description" content="A top-down alien shooter fan game inspired by the classic Amiga game Alien Breed by Team17.">
+  <meta property="og:image" content="https://yaab.io/assets/poster.png">
+  <meta property="og:image:alt" content="YAAB gameplay screenshot showing top-down alien shooter action">
+  <meta property="og:site_name" content="YAAB">
+  <meta property="og:locale" content="en_US">
+  
+  <link rel="preload" href="assets/poster.png" as="image">
+  <link rel="preload" href="assets/background.webm" as="video" type="video/webm">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <main class="hero">
+    <video class="background-video" autoplay muted loop playsinline poster="assets/poster.png">
+      <source src="assets/background.webm" type="video/webm">
+      <source src="assets/background.mp4" type="video/mp4">
+    </video>
+    
+    <div class="scanlines"></div>
+    
+    <div class="overlay"></div>
+    
+    <div class="content">
+      <h1 class="title">YAAB</h1>
+      <p class="subtitle">Yet Another Alien Breed</p>
+      <p class="tagline">Survive the alien onslaught in this top-down arcade shooter inspired by the classic Amiga game Alien Breed by Team17</p>
+      <a href="game/index.html" class="start-button" id="startButton">START GAME</a>
+    </div>
+
+    <div class="attribution">
+      <a href="https://github.com/Ben1980/yaab" target="_blank" rel="noopener noreferrer">
+        <img class="github-icon" src="assets/gitHub_Invertocat_White.svg" alt="GitHub" width="16" height="16" loading="lazy">
+        github.com/Ben1980/yaab
+      </a>
+      <span class="separator">·</span>
+      <span>Created by Benjamin Mahr</span>
+      <span class="separator">·</span>
+      <a href="https://github.com/Ben1980/yaab/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Open Source</a>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+# robots.txt for yaab.io
+# https://yaab.io/
+
+# Allow all standard search engine crawlers
+User-agent: *
+Allow: /
+
+# Block AI training crawlers
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+# Anthropic
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# Google AI (separate from search indexing)
+User-agent: Google-Extended
+Disallow: /
+
+# Common Crawl (used for AI training datasets)
+User-agent: CCBot
+Disallow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Disallow: /
+
+# Amazon
+User-agent: Amazonbot
+Disallow: /
+
+# Meta / Facebook AI
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Disallow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Disallow: /
+
+# You.com
+User-agent: YouBot
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+# Diffbot
+User-agent: Diffbot
+Disallow: /
+
+# Omgili
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+# PetalBot
+User-agent: PetalBot
+Disallow: /
+
+# Semrush
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://yaab.io/sitemap.xml
