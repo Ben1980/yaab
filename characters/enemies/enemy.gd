@@ -89,7 +89,6 @@ func chase_behavior() -> void:
 	var distance_to_target = global_position.distance_to(target_pos)
 	
 	if distance_to_target < 5.0:
-		# Reached last known position, return to patrol
 		current_state = State.PATROL
 		pick_random_patrol_direction()
 		return
@@ -103,10 +102,9 @@ func pick_random_patrol_direction() -> void:
 
 
 func handle_wall_collision() -> void:
-	# If we hit a wall during patrol, pick a new direction
 	if current_state == State.PATROL and get_slide_collision_count() > 0:
 		pick_random_patrol_direction()
-		patrol_timer = 0.0  # Reset timer so we don't immediately change again
+		patrol_timer = 0.0
 
 
 func update_animation() -> void:
