@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var patrol_speed: float = 30.0
 @export var chase_speed: float = 90.0
 @export var vision_range: float = 250.0
@@ -15,18 +14,17 @@ var player: CharacterBody2D = null
 var patrol_direction: Vector2 = Vector2.ZERO
 var patrol_timer: float = 0.0
 var last_known_player_pos: Vector2 = Vector2.ZERO
-
+var query: PhysicsRayQueryParameters2D = null
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-
 signal enemy_died
 
-
 func _ready() -> void:
+	query = PhysicsRayQueryParameters2D.new()
+	
 	add_to_group("enemy")
 	call_deferred("player_setup")
-
 
 func _physics_process(delta: float) -> void:
 	if player == null || !is_instance_valid(player):
@@ -55,12 +53,10 @@ func _physics_process(delta: float) -> void:
 	update_facing(delta)
 	check_player_collision()
 
-
 func player_setup() -> void:
 	await get_tree().physics_frame
 	player = get_tree().get_first_node_in_group("player")
 	pick_random_patrol_direction()
-
 
 func check_line_of_sight() -> bool:
 	if player == null || !is_instance_valid(player):
@@ -71,16 +67,16 @@ func check_line_of_sight() -> bool:
 		return false
 	
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(
-		global_position,
-		player.global_position,
-		1  # Collision mask - walls only (physics_layer_0)
-	)
-	query.exclude = [self]
+	if query:
+		query.from = global_position
+		query.to = player.global_position
+		query.collision_mask = 1
+		query.exclude = [self]
+	else:
+		return false
 	
 	var result = space_state.intersect_ray(query)
 	return result.is_empty()  # No obstacle = can see player
-
 
 func patrol_behavior(delta: float) -> void:
 	patrol_timer += delta
@@ -89,7 +85,6 @@ func patrol_behavior(delta: float) -> void:
 		pick_random_patrol_direction()
 	
 	velocity = patrol_direction * patrol_speed
-
 
 func chase_behavior() -> void:
 	var target_pos = last_known_player_pos
@@ -102,24 +97,20 @@ func chase_behavior() -> void:
 	
 	velocity = global_position.direction_to(target_pos) * chase_speed
 
-
 func pick_random_patrol_direction() -> void:
 	var angle = randf() * TAU  # Random angle 0-2π
 	patrol_direction = Vector2.from_angle(angle)
-
 
 func handle_wall_collision() -> void:
 	if current_state == State.PATROL and get_slide_collision_count() > 0:
 		pick_random_patrol_direction()
 		patrol_timer = 0.0
 
-
 func update_animation() -> void:
 	if velocity.length() > velocity_threshold:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
-
 
 func update_facing(delta: float) -> void:
 	const offset: float = PI/2
@@ -128,14 +119,12 @@ func update_facing(delta: float) -> void:
 		var target_angle = velocity.angle() - offset
 		self.rotation = lerp_angle(self.rotation, target_angle, delta * rotation_speed)
 
-
 func check_player_collision() -> void:
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		if collider.is_in_group("player") and collider.has_method("die"):
 			collider.die()
-
 
 func die() -> void:
 	enemy_died.emit()

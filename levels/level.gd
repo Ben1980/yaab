@@ -1,36 +1,36 @@
 extends Node2D
 
-
 @export var enemy_count: int = 5
 @export var color_transition_duration: float = 0.75
 @export var save_radius: float = 100
 
+var query: PhysicsPointQueryParameters2D = null
 
 const ENEMY_SCENE: PackedScene = preload("res://characters/enemies/enemy.tscn")
-
 
 @onready var game_over_screen: Control = $GameOverLayer/GameOverScreen
 @onready var restart_button: Button = $GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Restart
 @onready var quit_button: Button = $GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Quit
 @onready var player: CharacterBody2D = $Player
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	query = PhysicsPointQueryParameters2D.new()
 	call_deferred("spawn_enemies")
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
 		_on_quit_pressed()
 
-
 func is_position_valid(pos: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsPointQueryParameters2D.new()
-	query.position = pos
-	query.collision_mask = 1  # Match physics_layer_0
-	query.collide_with_bodies = true
+	
+	if query:
+		query.position = pos
+		query.collision_mask = 1 
+		query.collide_with_bodies = true
+	else:
+		return false
 	
 	if not space_state.intersect_point(query).is_empty():
 		return false
@@ -39,7 +39,6 @@ func is_position_valid(pos: Vector2) -> bool:
 		return distance_to_player > save_radius
 	
 	return false
-
 
 func spawn_enemies() -> void:
 	var spawned = 0
@@ -51,7 +50,6 @@ func spawn_enemies() -> void:
 		
 		if spawn_single_enemy():
 			spawned += 1
-
 
 func spawn_single_enemy() -> bool:
 	var floor_layer: TileMapLayer = $Floor
@@ -72,10 +70,8 @@ func spawn_single_enemy() -> bool:
 	
 	return false
 
-
 func _on_enemy_died() -> void:
 	call_deferred("spawn_single_enemy")
-
 
 func _on_player_game_over() -> void:
 	game_over_screen.show()
@@ -91,14 +87,12 @@ func _on_player_game_over() -> void:
 	tween.tween_callback(quit_button.show)
 	tween.tween_callback(restart_button.grab_focus)
 
-
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
-
 func _on_quit_pressed() -> void:
 	if OS.has_feature("web"):
-		JavaScriptBridge.eval("window.locationhref = 'https://yaab.org'")
+		JavaScriptBridge.eval("window.location.href = 'https://yaab.online'")
 	else:
 		get_tree().quit()

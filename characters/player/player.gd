@@ -1,13 +1,11 @@
 extends CharacterBody2D
 
-
 @export var speed: float = 30
 @export var cooldown_time: float = 0.2
 @export var controller_deadzone: float = 0.1
 @export var velocity_threshold: float = 0.1
 @export var sprite_speed_scale: float = 2.0
 @export var run_speed_factor: float = 2.1
-
 
 var aim_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
@@ -17,16 +15,12 @@ var using_controller: bool = false
 var observed_stick_max: float = 0.7
 var player_speed_factor: float = 1.0
 
-
 const LASER_SCENE: PackedScene = preload("res://weapons/laser.tscn")
-
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_cooldown: Timer = $FireCooldown
 
-
 signal game_over
-
 
 func get_input() -> void:
 	if not is_dead:
@@ -62,7 +56,6 @@ func get_input() -> void:
 			var forward_input = Input.get_axis("move_down", "move_up")
 			velocity = -transform.y.normalized() * forward_input * speed * player_speed_factor
 
-
 func _input(event: InputEvent) -> void:
 	if not is_dead:
 		if event is InputEventMouseMotion or event is InputEventMouseButton:
@@ -80,7 +73,6 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_pressed("shoot"):
 			fire()
 
-
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
@@ -88,12 +80,10 @@ func _physics_process(_delta: float) -> void:
 	update_animation()
 	move_and_slide()
 
-
 func _ready() -> void:
 	add_to_group("player")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	controller_available = Input.get_connected_joypads().size() > 0
-
 
 func update_animation() -> void:
 	if velocity.length() > velocity_threshold:
@@ -101,13 +91,11 @@ func update_animation() -> void:
 	else:
 		sprite.play("idle")
 
-
 func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
 	game_over.emit()
-
 
 func fire() -> void:
 	if not can_fire:
@@ -122,10 +110,8 @@ func fire() -> void:
 	get_parent().add_child(laser)
 	fire_cooldown.start(cooldown_time)
 
-
 func _on_fire_cooldown_timeout() -> void:
 	can_fire = true
-
 
 func _on_joy_connection_changed(_device_id: int, _connected: bool) -> void:
 	controller_available = Input.get_connected_joypads().size() > 0
