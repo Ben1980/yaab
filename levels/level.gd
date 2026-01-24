@@ -70,4 +70,7 @@ func _on_restart_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("window.locationhref = 'https://yaab.org'")
+	else:
+		get_tree().quit()

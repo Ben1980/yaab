@@ -1,40 +1,68 @@
-[gd_scene load_steps=6 format=4 uid="uid://8c68pgr3marj"]
+[gd_scene load_steps=10 format=4 uid="uid://8c68pgr3marj"]
 
 [ext_resource type="Script" uid="uid://4cc3otgw4eqi" path="res://levels/level.gd" id="1_oi3di"]
 [ext_resource type="Texture2D" uid="uid://d3vgot12v3wwo" path="res://levels/sprites/tileset.png" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://26ljsnexi04d" path="res://characters/player/player.tscn" id="2_vonw3"]
+[ext_resource type="FontFile" uid="uid://d0m430cspsn3o" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_5mrsh"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5mrsh"]
 texture = ExtResource("1_u52ul")
-texture_region_size = Vector2i(48, 48)
+texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -24, 24, -21.7214, 24, -21.842, -24)
-0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(21.5919, -24, 20.9128, 24, 24, 24, 24, -24)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -40.7033, -64, -40.607605, 64, -64, 64)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(40.386223, -64, 64, -64, 64, 64, 40.450943, 64)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, 22.0694, -22.0649, 22.088, -22.0835, 24, -24, 24)
-1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, 22.0352, 24, 22.0827, -22.0493, -24, -21.9281)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, -40.126755, 40.59784, -40.40785, 40.297173, 64, 64, 64, 64, -64)
+1:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-64, 40.411816, -40.182076, 40.411816, -40.178116, 64, -64, 64)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -40.776768, -64, -40.66769, -40.31972, -64, -40.210648)
+2:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(40.495377, -64, 64, -64, 64, -40.605503, 40.440834, -40.82366)
+2:0/0/physics_layer_0/polygon_2/points = PackedVector2Array(-64, 40.64476, -40.60006, 40.753838, -40.436447, 64, -64, 64)
+2:0/0/physics_layer_0/polygon_3/points = PackedVector2Array(40.645897, 40.570587, 64, 40.62513, 64, 64, 40.482285, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -40.60395, -64, -40.31804)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 40.904366, 64, 40.607597, -40.45922, -64, -40.75599)
 0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -22.193, -24, -22.1397, -22.0628, -24, -22.0628)
-0:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(22.1276, -24, 24, -24, 24, -22.1368, 22.1632, -22.1013)
-0:1/0/physics_layer_0/polygon_2/points = PackedVector2Array(-24, 22.0095, -21.993, 22.0273, -22.0464, 24, -24, 24)
-0:1/0/physics_layer_0/polygon_3/points = PackedVector2Array(21.9775, 21.9817, 24, 22.0173, 24, 24, 21.9597, 24)
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, -64, -64, 64, -64, 64, 64, 40.805443, 64, 40.607597, -39.371075, -40.904373, -39.371075, -40.211914, 64)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, -24, 24, 24, 24, 24, -24, 22.0735, -24, 22.0116, 22.023, -22.0351, 22.0137, -22.1062, -24)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(40.607597, -64, 64, -64, 64, 64, 41.00329, 64)
+1:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(-64, 40.657066, -40.80545, 40.558144, -40.508682, 64, -64, 64)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -40.42164, -64, -40.42164, -40.423615, -64, -40.62146)
+2:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(40.271263, -64, 64, -64, 64, -40.37218, 40.76587, -40.37218)
+2:1/0/physics_layer_0/polygon_2/points = PackedVector2Array(-64, 40.593727, 64, 40.45523, 64, 64, -64, 64)
+3:1/0 = 0
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, -40.3603, 64, -40.75599, 64, -64)
+4:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(-64, 40.854904, -40.40976, 40.3603, -40.40976, 64, -64, 64)
 
-[sub_resource type="TileSet" id="TileSet_oi3di"]
-tile_size = Vector2i(48, 48)
+[sub_resource type="TileSet" id="TileSet_safpt"]
+tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_vonw3")
+sources/0 = SubResource("TileSetAtlasSource_5mrsh")
+
+[sub_resource type="FontVariation" id="FontVariation_safpt"]
+base_font = ExtResource("4_5mrsh")
+spacing_glyph = 16
+
+[sub_resource type="FontVariation" id="FontVariation_gjl0y"]
+base_font = ExtResource("4_5mrsh")
+
+[sub_resource type="FontVariation" id="FontVariation_vnv7o"]
+base_font = ExtResource("4_5mrsh")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_oi3di")
+enemy_count = 20
 
 [node name="Floor" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAOAAkAAQAAAAAAAAAOAAgAAQAAAAAAAAAOAAcAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAUAAQABAAAAAAANAAUAAQAAAAEAAAANAAYAAQAAAAAAAAANAAcAAQAAAAAAAAANAAgAAQAAAAAAAAANAAkAAQAAAAAAAAANAAoAAQAAAAEAAAAOAAoAAQABAAAAAFANAAQAAQABAAAAAAANAAsAAQABAAAAAFAMAAsAAQABAAAAADAMAAQAAQABAAAAAGAMAAUAAQAAAAEAAAAMAAoAAQAAAAEAAAAMAAYAAQABAAEAAAAMAAkAAQABAAEAADALAAoAAQAAAAAAAFAKAAoAAQAAAAAAAFALAAUAAQAAAAAAAFAKAAUAAQAAAAAAAFAJAAUAAQAAAAAAAFAIAAUAAQABAAAAAGAIAAYAAQABAAAAADAJAAYAAQAAAAAAAFAJAAcAAQAAAAAAAFAJAAgAAQAAAAAAAFAJAAkAAQAAAAAAAFAKAAYAAQABAAAAAAAKAAgAAQABAAAAAAAIAAcAAQABAAAAAGAIAAkAAQABAAAAAGAIAAgAAQABAAAAADAIAAoAAQABAAAAADAKAAkAAQABAAAAAFAKAAcAAQABAAAAAFAJAAoAAQAAAAAAAFA=")
-tile_set = SubResource("TileSet_oi3di")
+tile_map_data = PackedByteArray("AAAEAAMAAAAAAAEAADAEAAIAAAABAAEAAAADAAEAAAADAAEAAAAEAAAAAAABAAEAAGADAAAAAAADAAAAAAAEAAEAAAADAAAAAFACAAAAAAAEAAAAAGADAAIAAAADAAAAADACAAIAAAAEAAEAAGACAAEAAAADAAAAAGACAAMAAAACAAEAAAADAAMAAAABAAAAAAABAAMAAAABAAAAADABAAIAAAACAAEAAGABAAEAAAACAAEAAGAAAAIAAAACAAAAAAAAAAEAAAACAAAAAAD//wIAAAACAAEAAFD//wEAAAACAAEAAFAAAAMAAAABAAAAAFD//wMAAAABAAAAADABAAAAAAABAAAAAAAAAAAAAAACAAEAADD//wAAAAACAAEAADD+/wAAAAABAAEAAGD9/wAAAAABAAEAAHD+/wEAAAADAAAAAFD9/wEAAAADAAAAAGD9/wIAAAADAAAAAGD9/wMAAAADAAAAAGD9/wQAAAAEAAAAADD+/wIAAAADAAAAAFD+/wMAAAADAAAAAFD//wQAAAAAAAAAAHAAAAQAAAAAAAAAAEABAAQAAAACAAEAACACAAQAAAAAAAAAAHD+/wQAAAABAAEAAEADAAQAAAABAAAAAFD8/wAAAAACAAEAAFD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAADD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAABD8/wUAAAABAAAAADD9/wUAAAACAAEAACD9/wYAAAAEAAEAAFD8/wYAAAAEAAEAAAD8/wcAAAABAAEAAFD9/wcAAAABAAEAAED7/wcAAAABAAEAAFD7/wYAAAACAAEAAFD7/wUAAAAAAAEAAAD+/wUAAAAAAAAAAFD//wUAAAAAAAEAAFAFAAAAAAACAAAAAAAGAAAAAAACAAEAABAFAP//AAABAAAAAAAEAP//AAAAAAAAAFADAP//AAABAAAAADADAP7/AAAAAAEAAAAGAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAGAP3/AAACAAEAACAHAP3/AAAAAAAAAFAFAP3/AAAAAAAAAEAIAP3/AAAAAAAAAEAJAP3/AAABAAAAAAAIAAAAAAAEAAAAAAAHAAAAAAAEAAEAAAAHAAEAAAADAAAAAGAHAAIAAAADAAAAAGAIAAMAAAABAAEAAEAHAAMAAAAEAAAAADAIAAIAAAADAAAAAFAIAAEAAAADAAAAAHAJAP7/AAABAAAAADAKAP7/AAABAAAAAAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAADAKAAEAAAAAAAAAABAKAAIAAAACAAEAAFAKAAMAAAABAAAAAFAJAAMAAAAAAAAAAFAEAP3/AAAAAAAAAFADAP3/AAAAAAAAAFACAP3/AAAAAAAAAFABAP3/AAABAAAAAGABAP7/AAABAAAAAFAAAP7/AAAAAAAAAFD///7/AAAAAAAAAED+//7/AAAAAAAAAGD8////AAAAAAAAAAD8//7/AAABAAAAAGD9//7/AAAAAAAAAFAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAADAFAAMAAAAAAAAAAAAFAAQAAAACAAEAAFAFAAUAAAAAAAAAAAAFAAYAAAABAAAAAFAEAAYAAAAAAAAAAFADAAYAAAAAAAAAAFABAAYAAAACAAAAAAABAAUAAAAAAAAAAAACAAYAAAAAAAAAAGAAAAYAAAAAAAAAAGD//wYAAAAAAAAAAGD+/wYAAAABAAAAAGD+/wcAAAABAAAAAFABAAcAAAACAAEAAAACAAcAAAABAAEAAHAAAAcAAAABAAEAAGD//wcAAAAEAAAAAGADAAcAAAAEAAAAAAABAAgAAAADAAAAAAACAAgAAAADAAEAAAAAAAgAAAADAAEAAAAAAAkAAAADAAEAAAABAAkAAAADAAEAAAACAAkAAAADAAEAAAABAAoAAAADAAAAACABAAsAAAACAAEAACACAAsAAAABAAEAAFAAAAsAAAABAAEAAEACAAoAAAADAAEAAAAAAAoAAAADAAEAAAD//wgAAAADAAAAAGD//wkAAAADAAAAAED//woAAAADAAAAAEADAAoAAAADAAAAAFADAAkAAAADAAAAAFADAAgAAAADAAAAAHADAAsAAAAEAAAAAFD//wsAAAABAAEAAFABAAwAAAACAAEAAAACAAwAAAAAAAAAAFADAAwAAAAAAAAAAFAEAAwAAAACAAAAAAACAA0AAAAAAAEAAGADAA0AAAAAAAAAAFAEAA0AAAABAAAAAFAHAAwAAAABAAAAAFAEAAkAAAABAAAAAGAEAAsAAAAAAAAAABAEAAoAAAAAAAAAAAAFAAwAAAAAAAAAAFAGAAwAAAAAAAAAAFAHAAsAAAAAAAAAABAHAAoAAAAAAAAAACAFAAkAAAAAAAAAAGAGAAkAAAAAAAAAAFAHAAkAAAACAAAAAAAHAAgAAAAAAAAAAAAHAAcAAAAAAAAAADAHAAYAAAAAAAAAACAHAAUAAAAAAAAAAAAGAAQAAAAAAAAAAFAHAAQAAAABAAAAAAAIAAkAAAABAAAAAAAIAAoAAAABAAAAADAJAAoAAAAAAAAAAFAKAAoAAAAAAAAAAGALAAoAAAABAAAAAFALAAkAAAAAAAAAAAALAAIAAAABAAAAACALAAEAAAABAAAAABAMAAEAAAABAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAALAAcAAAABAAAAAGALAAgAAAAAAAAAAAAMAAcAAAABAAAAAFD+/wwAAAABAAAAADD//wwAAAAAAAAAAFAAAAwAAAAAAAAAAED+/wsAAAACAAAAAAD+/woAAAABAAAAAAD9/wsAAAAAAAAAAGD9/woAAAAAAAAAAGD8/woAAAAAAAAAAHD8/wsAAAAAAAAAAFD7/wsAAAAAAAAAAFD7/woAAAAAAAAAAGD6/woAAAAAAAAAAGD6/wsAAAAAAAAAAGD5/woAAAABAAAAADD4/wsAAAABAAAAADD5/wsAAAAAAAAAAFD4/woAAAAAAAAAADD5/wkAAAAAAAAAADD4/wkAAAAAAAAAACD5/wgAAAAAAAAAABD4/wgAAAAAAAAAACD4/wcAAAABAAAAABD5/wcAAAACAAEAACD6/wcAAAAAAAAAAFA=")
+tile_set = SubResource("TileSet_safpt")
 
 [node name="Player" parent="." instance=ExtResource("2_vonw3")]
-position = Vector2(600, 328)
+position = Vector2(576, 447)
+speed = 90.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
@@ -70,19 +98,43 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverLayer/GameOverScreen/CenterContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="GameOver" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+[node name="Container" type="CenterContainer" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="GlowLabel" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22352941, 1, 0.078431375, 1)
+theme_override_fonts/font = SubResource("FontVariation_safpt")
+theme_override_font_sizes/font_size = 60
+text = "GAME OVER"
+
+[node name="GameOver" type="Label" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22352941, 1, 0.078431375, 1)
+theme_override_fonts/font = SubResource("FontVariation_safpt")
+theme_override_font_sizes/font_size = 60
 text = "GAME OVER"
 
 [node name="Restart" type="Button" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
-visible = false
+custom_minimum_size = Vector2(220, 60)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 4
+theme_override_fonts/font = SubResource("FontVariation_gjl0y")
+theme_override_font_sizes/font_size = 24
 text = "Restart"
 
 [node name="Quit" type="Button" parent="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer"]
-visible = false
+custom_minimum_size = Vector2(220, 60)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_vnv7o")
+theme_override_font_sizes/font_size = 24
 text = "Quit"
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]

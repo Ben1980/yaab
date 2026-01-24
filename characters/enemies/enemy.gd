@@ -116,7 +116,7 @@ func update_animation() -> void:
 
 func update_facing() -> void:
 	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
+		sprite.flip_h = velocity.x > 0
 
 
 func check_player_collision() -> void:
