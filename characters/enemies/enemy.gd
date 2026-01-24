@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var direction_change_time: float = 2.0 
 @export var velocity_threshold: float = 1.0
 @export var rotation_speed: float = 10.0
-
+@export var sprite_speed_scale: float = 2.0
 
 enum State { PATROL, CHASE }
 var current_state: State = State.PATROL
@@ -37,8 +37,10 @@ func _physics_process(delta: float) -> void:
 			if can_see_player:
 				current_state = State.CHASE
 				last_known_player_pos = player.global_position
+				sprite.speed_scale = sprite_speed_scale
 			else:
 				patrol_behavior(delta)
+				sprite.speed_scale = 1.0 
 		State.CHASE:
 			if can_see_player:
 				last_known_player_pos = player.global_position

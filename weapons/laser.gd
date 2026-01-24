@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 200
+@export var speed: float = 400
 
 var direction: Vector2 = Vector2.ZERO
 

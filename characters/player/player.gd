@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var cooldown_time: float = 0.2
 @export var controller_deadzone: float = 0.1
 @export var velocity_threshold: float = 0.1
+@export var sprite_speed_scale: float = 2.0
 
 
 var aim_direction: Vector2 = Vector2.RIGHT
@@ -69,9 +70,11 @@ func _input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("player_run"):
 			player_speed_factor = 2.1
+			sprite.speed_scale = sprite_speed_scale
 		
 		if event.is_action_released("player_run"):
 			player_speed_factor = 1.0
+			sprite.speed_scale = 1.0
 		
 		if Input.is_action_pressed("shoot"):
 			fire()
