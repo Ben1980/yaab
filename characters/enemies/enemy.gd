@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var chase_speed: float = 60.0
 @export var vision_range: float = 150.0
 @export var direction_change_time: float = 2.0 
+@export var velocity_threshold: float = 0.1
 
 
 enum State { PATROL, CHASE }
@@ -108,15 +109,15 @@ func handle_wall_collision() -> void:
 
 
 func update_animation() -> void:
-	if velocity.length() > 1.0:
+	if velocity.length() > velocity_threshold:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
 
 
 func update_facing() -> void:
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x > 0
+	if velocity.length() > velocity_threshold:
+		self.rotation = velocity.angle() - PI/2
 
 
 func check_player_collision() -> void:

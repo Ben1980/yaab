@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed: float = 30
 @export var cooldown_time: float = 0.2
 @export var controller_deadzone: float = 0.1
+@export var velocity_threshold: float = 0.1
 
 
 var aim_direction: Vector2 = Vector2.RIGHT
@@ -91,7 +92,7 @@ func _ready() -> void:
 
 
 func update_animation() -> void:
-	if velocity.length() > 1.0:
+	if velocity.length() > velocity_threshold:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
