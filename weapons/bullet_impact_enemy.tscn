@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://chck4ajsdulfx" path="res://weapons/bullet_impact_enemy.gd" id="1_8g42x"]
 
 [sub_resource type="Gradient" id="Gradient_8g42x"]
-offsets = PackedFloat32Array(0.0030674846, 1)
-colors = PackedColorArray(0.85754526, 0, 0, 1, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0.0030674846, 0.516129, 1)
+colors = PackedColorArray(0.48452926, 0, 0, 1, 0.48452926, 0, 0, 1, 0.48452926, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_a7dal"]
 gradient = SubResource("Gradient_8g42x")
@@ -24,8 +24,8 @@ color_ramp = SubResource("GradientTexture1D_a7dal")
 
 [node name="BulletImpactEnemy" type="GPUParticles2D" unique_id=796226099]
 emitting = false
-amount = 10
-lifetime = 0.25
+amount = 15
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_qetx1")

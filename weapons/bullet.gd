@@ -8,6 +8,7 @@ extends Area2D
 @export var bullet_back_color: Color = Color(0.86, 0.393, 0.06, 0.1)
 
 var direction: Vector2 = Vector2.ZERO
+var shape_cast: ShapeCast2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -17,19 +18,31 @@ const BULLET_IMPACT_ENEMY_SCENE: PackedScene = preload("res://weapons/bullet_imp
 
 func _ready() -> void:
 	setup_texture()
+	setup_shape_cast()
 
 func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and body.has_method("hit"):
-		sheed_blood()
-		body.hit()
-	else:
-		var wall_normal = get_wall_normal()
-		spawn_impact(wall_normal)
+	#position += direction * speed * delta
+	var movement_vector = direction * speed * delta
 	
-	queue_free()
+	shape_cast.target_position = movement_vector
+	shape_cast.force_shapecast_update()
+	
+	if shape_cast.is_colliding():
+		var safe_fraction = shape_cast.get_closest_collision_safe_fraction()
+		position += movement_vector * safe_fraction
+		
+		var collider = shape_cast.get_collider(0)
+		var hit_normal = shape_cast.get_collision_normal(0)
+		
+		if collider.is_in_group("enemy") and collider.has_method("hit"):
+			enemy_impact()
+			collider.hit()
+		else:
+			wall_impact(hit_normal)
+			
+		queue_free()
+	else:
+		position += movement_vector
 
 func setup_texture() -> void:
 	var image = Image.create(bullet_width, bullet_length, false, Image.FORMAT_RGBA8)
@@ -49,30 +62,28 @@ func setup_texture() -> void:
 	
 	collision_shape.shape.size = Vector2(bullet_width, bullet_length)
 
-func spawn_impact(wall_normal: Vector2) -> void:
-	var wall_impact = BULLET_IMPACT_WALL_SCENE.instantiate()
+func wall_impact(wall_normal: Vector2) -> void:
+	var wall_impact_instance = BULLET_IMPACT_WALL_SCENE.instantiate()
 	var tip_offset = direction.normalized() * (bullet_length / 2.0)
-	wall_impact.global_position = global_position + tip_offset
-	wall_impact.rotation = wall_normal.angle()
-	get_parent().add_child(wall_impact)
+	wall_impact_instance.global_position = global_position + tip_offset
+	wall_impact_instance.rotation = wall_normal.angle()
+	get_parent().add_child(wall_impact_instance)
 
-func get_wall_normal() -> Vector2:
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(
-		  global_position,
-		  global_position + direction * 50.0  # Ray ahead of bullet
-	)
-	query.exclude = [self]
-	query.collision_mask = collision_mask
-	var result = space_state.intersect_ray(query)
+func enemy_impact() -> void:
+	var enemy_impact_instance = BULLET_IMPACT_ENEMY_SCENE.instantiate()
+	enemy_impact_instance.set_direction(self.direction)
+	var tip_offset = direction.normalized() * (bullet_length / 2.0)
+	enemy_impact_instance.global_position = global_position + tip_offset
+	get_parent().add_child(enemy_impact_instance)
+
+func setup_shape_cast() -> void:
+	shape_cast = ShapeCast2D.new()
+	var cast_shape = RectangleShape2D.new()
 	
-	if result:
-		return result.normal
-	else:
-		return -direction
-
-func sheed_blood() -> void:
-	var enemy_impact = BULLET_IMPACT_ENEMY_SCENE.instantiate()
-	var tip_offset = direction.normalized() * (bullet_length / 2.0)
-	enemy_impact.global_position = global_position + tip_offset
-	get_parent().add_child(enemy_impact)
+	cast_shape.size = Vector2(bullet_width, bullet_length)
+	shape_cast.shape = cast_shape
+	
+	shape_cast.collision_mask = self.collision_mask
+	shape_cast.enabled = true
+	
+	add_child(shape_cast)
