@@ -128,8 +128,7 @@ func check_player_collision() -> void:
 			collider.hit()
 
 func hit() -> void:
-	if life > 0:
-		life -= 1
-	else:
+	life -= 10
+	if life <= 0:
 		enemy_died.emit()
 		queue_free()

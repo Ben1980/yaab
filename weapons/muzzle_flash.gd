@@ -56,5 +56,5 @@ func calculate_flame_color(center_distance: float, y: float, height: float) -> C
 	else:
 		return dark_color
 
-func getLength() -> int:
+func get_length() -> int:
 	return muzzle_flash_pattern.size() 

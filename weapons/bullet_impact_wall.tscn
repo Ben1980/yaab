@@ -23,6 +23,7 @@ scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_t4j1t")
 
 [node name="BulletImpactWall" type="GPUParticles2D" unique_id=94043626]
+z_index = 2
 emitting = false
 amount = 10
 lifetime = 0.25

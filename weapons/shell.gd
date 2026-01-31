@@ -23,19 +23,19 @@ func setup_kinematic() -> void:
 
 func setup_texture() -> void:
 	var shell_width = 3
-	var shell_hight = 7
-	var image = Image.create(shell_width, shell_hight, false, Image.FORMAT_RGBA8)
+	var shell_height = 7
+	var image = Image.create(shell_width, shell_height, false, Image.FORMAT_RGBA8)
 	
 	for x in range(0, shell_width):
 		image.set_pixel(x, 0, Color(0.40, 0.32, 0.20));
 	
-	for y in range(1, shell_hight):
+	for y in range(1, shell_height):
 		image.set_pixel(0, y, Color(0.55, 0.45, 0.28));
 		image.set_pixel(1, y, Color(0.72, 0.60, 0.38));
 		image.set_pixel(2, y, Color(0.88, 0.78, 0.55));
 	
 	sprite.texture = ImageTexture.create_from_image(image)
-	collision_shape.shape.size = Vector2(shell_width, shell_hight)
+	collision_shape.shape.size = Vector2(shell_width, shell_height)
 
 func _on_lifetime_timeout() -> void:
 	var tween = create_tween()

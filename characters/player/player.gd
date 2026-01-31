@@ -128,7 +128,7 @@ func _on_joy_connection_changed(_device_id: int, _connected: bool) -> void:
 
 func add_muzzle_flash() -> void:
 	var muzzle_flash = MUZZLE_FLASH_SCENE.instantiate()
-	var offset_distance = muzzle_flash.getLength() / 2.0
+	var offset_distance = muzzle_flash.get_length() / 2.0
 	muzzle_flash.global_position = muzzle_point.global_position + (aim_direction * offset_distance)
 	muzzle_flash.rotation = self.rotation + PI
 	get_parent().add_child(muzzle_flash)

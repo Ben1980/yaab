@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enemy_count: int = 5
 @export var color_transition_duration: float = 0.75
-@export var save_radius: float = 200
+@export var safe_radius: float = 250
 
 var query: PhysicsPointQueryParameters2D = null
 
@@ -36,7 +36,7 @@ func is_position_valid(pos: Vector2) -> bool:
 		return false
 	if is_instance_valid(player):
 		var distance_to_player = query.position.distance_to(player.global_position)
-		return distance_to_player > save_radius
+		return distance_to_player > safe_radius
 	
 	return false
 

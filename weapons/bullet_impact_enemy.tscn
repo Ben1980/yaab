@@ -23,6 +23,7 @@ scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_a7dal")
 
 [node name="BulletImpactEnemy" type="GPUParticles2D" unique_id=796226099]
+z_index = 2
 emitting = false
 amount = 15
 lifetime = 0.5

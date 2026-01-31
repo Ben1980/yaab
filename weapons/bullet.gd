@@ -12,6 +12,7 @@ var shape_cast: ShapeCast2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var lifetime: Timer = $Timer
 
 const BULLET_IMPACT_WALL_SCENE: PackedScene = preload("res://weapons/bullet_impact_wall.tscn")
 const BULLET_IMPACT_ENEMY_SCENE: PackedScene = preload("res://weapons/bullet_impact_enemy.tscn")
@@ -19,12 +20,12 @@ const BULLET_IMPACT_ENEMY_SCENE: PackedScene = preload("res://weapons/bullet_imp
 func _ready() -> void:
 	setup_texture()
 	setup_shape_cast()
+	lifetime.start()
 
 func _physics_process(delta: float) -> void:
-	#position += direction * speed * delta
 	var movement_vector = direction * speed * delta
 	
-	shape_cast.target_position = movement_vector
+	shape_cast.target_position = movement_vector.rotated(-rotation)
 	shape_cast.force_shapecast_update()
 	
 	if shape_cast.is_colliding():
@@ -87,3 +88,6 @@ func setup_shape_cast() -> void:
 	shape_cast.enabled = true
 	
 	add_child(shape_cast)
+
+func _on_timer_timeout() -> void:
+	queue_free()
