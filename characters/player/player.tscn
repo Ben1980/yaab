@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://26ljsnexi04d"]
+[gd_scene format=3 uid="uid://26ljsnexi04d"]
 
 [ext_resource type="Script" uid="uid://dlkqk01pyg2xj" path="res://characters/player/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://brne38m67bph0" path="res://characters/player/sprites/player.png" id="2_xxgcw"]
@@ -135,19 +135,24 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1602949342]
+z_index = 2
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_i3pqv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1318349671]
 sprite_frames = SubResource("SpriteFrames_hqtel")
-animation = &"idle"
-frame_progress = 0.9011356
+animation = &"walk"
+frame = 2
+frame_progress = 0.49202028
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="MuzzlePoint" type="Marker2D" parent="AnimatedSprite2D" unique_id=1379902603]
+position = Vector2(3.5, -21.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=113055482]
 polygon = PackedVector2Array(0, 21, 6, 20, 11, 21, 18, 17, 21, 12, 18, 6, 14, 1, 10, -1, 6, -8, 6, -14, 4, -22, 3, -22, 0, -13, -2, -7, -7, -2, -14, 0, -21, 8, -21, 14, -13, 20)
 
-[node name="FireCooldown" type="Timer" parent="."]
+[node name="FireCooldown" type="Timer" parent="." unique_id=822690410]
 
 [connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]
