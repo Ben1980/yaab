@@ -14,8 +14,9 @@ var shape_cast: ShapeCast2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var lifetime: Timer = $Timer
 
-const BULLET_IMPACT_WALL_SCENE: PackedScene = preload("res://weapons/bullet_impact_wall.tscn")
+const BULLET_IMPACT_WALL_DEBRIS_SCENE: PackedScene = preload("res://weapons/bullet_impact_wall_debris.tscn")
 const BULLET_IMPACT_ENEMY_SCENE: PackedScene = preload("res://weapons/bullet_impact_enemy.tscn")
+const BULLET_IMPACT_WALL_SCENE: PackedScene = preload("res://weapons/bullet_impact_wall.tscn")
 
 func _ready() -> void:
 	setup_texture()
@@ -64,11 +65,13 @@ func setup_texture() -> void:
 	collision_shape.shape.size = Vector2(bullet_width, bullet_length)
 
 func wall_impact(wall_normal: Vector2) -> void:
-	var wall_impact_instance = BULLET_IMPACT_WALL_SCENE.instantiate()
+	var wall_impact_debris_instance = BULLET_IMPACT_WALL_DEBRIS_SCENE.instantiate()
 	var tip_offset = direction.normalized() * (bullet_length / 2.0)
-	wall_impact_instance.global_position = global_position + tip_offset
-	wall_impact_instance.rotation = wall_normal.angle()
-	get_parent().add_child(wall_impact_instance)
+	wall_impact_debris_instance.global_position = global_position + tip_offset
+	wall_impact_debris_instance.rotation = wall_normal.angle()
+	get_parent().add_child(wall_impact_debris_instance)
+	
+	shade_wall()
 
 func enemy_impact() -> void:
 	var enemy_impact_instance = BULLET_IMPACT_ENEMY_SCENE.instantiate()
@@ -88,6 +91,12 @@ func setup_shape_cast() -> void:
 	shape_cast.enabled = true
 	
 	add_child(shape_cast)
+
+func shade_wall() ->void:
+	var wall_impact_instance = BULLET_IMPACT_WALL_SCENE.instantiate()
+	var tip_offset = 1.25 * direction.normalized() * (bullet_length / 2.0)
+	wall_impact_instance.global_position = global_position + tip_offset
+	get_parent().add_child(wall_impact_instance)
 
 func _on_timer_timeout() -> void:
 	queue_free()
