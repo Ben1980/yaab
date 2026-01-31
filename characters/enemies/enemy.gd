@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var life: int = 100
 @export var patrol_speed: float = 30.0
 @export var chase_speed: float = 90.0
 @export var vision_range: float = 250.0
@@ -123,9 +124,12 @@ func check_player_collision() -> void:
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		if collider.is_in_group("player") and collider.has_method("die"):
-			collider.die()
+		if collider.is_in_group("player") and collider.has_method("hit"):
+			collider.hit()
 
-func die() -> void:
-	enemy_died.emit()
-	queue_free()
+func hit() -> void:
+	if life > 0:
+		life -= 1
+	else:
+		enemy_died.emit()
+		queue_free()
