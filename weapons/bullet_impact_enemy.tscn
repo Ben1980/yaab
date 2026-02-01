@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bte7av34bq2hx"]
+
+[ext_resource type="Script" uid="uid://chck4ajsdulfx" path="res://weapons/bullet_impact_enemy.gd" id="1_8g42x"]
+
+[sub_resource type="Gradient" id="Gradient_8g42x"]
+offsets = PackedFloat32Array(0.0030674846, 0.516129, 1)
+colors = PackedColorArray(0.48452926, 0, 0, 1, 0.48452926, 0, 0, 1, 0.48452926, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a7dal"]
+gradient = SubResource("Gradient_8g42x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qetx1"]
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 60.0
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+damping_min = 3.0000002
+damping_max = 6.0000005
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_a7dal")
+
+[node name="BulletImpactEnemy" type="GPUParticles2D" unique_id=796226099]
+z_index = 2
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qetx1")
+script = ExtResource("1_8g42x")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

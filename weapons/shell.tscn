@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://byboio47scn8o"]
+
+[ext_resource type="Script" uid="uid://da85gt2n6esi3" path="res://weapons/shell.gd" id="1_blene"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_blene"]
+friction = 0.95
+bounce = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blene"]
+
+[node name="Shell" type="RigidBody2D" unique_id=130054985]
+z_index = 1
+collision_layer = 0
+mass = 0.005
+physics_material_override = SubResource("PhysicsMaterial_blene")
+gravity_scale = 0.0
+linear_damp = 2.5
+script = ExtResource("1_blene")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1468751102]
+
+[node name="Lifetime" type="Timer" parent="Sprite2D" unique_id=1783099832]
+wait_time = 10.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=35545262]
+shape = SubResource("RectangleShape2D_blene")
+
+[connection signal="timeout" from="Sprite2D/Lifetime" to="." method="_on_lifetime_timeout"]

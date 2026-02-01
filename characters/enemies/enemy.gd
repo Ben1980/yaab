@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var life: int = 100
 @export var patrol_speed: float = 30.0
 @export var chase_speed: float = 90.0
 @export var vision_range: float = 250.0
@@ -7,6 +8,8 @@ extends CharacterBody2D
 @export var velocity_threshold: float = 1.0
 @export var rotation_speed: float = 10.0
 @export var sprite_speed_scale: float = 2.0
+@export var recoil_distance: float = 3.0
+@export var recoil_duration: float = 0.02
 
 enum State { PATROL, CHASE }
 var current_state: State = State.PATROL
@@ -15,6 +18,7 @@ var patrol_direction: Vector2 = Vector2.ZERO
 var patrol_timer: float = 0.0
 var last_known_player_pos: Vector2 = Vector2.ZERO
 var query: PhysicsRayQueryParameters2D = null
+var recoil_tween: Tween
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -123,9 +127,20 @@ func check_player_collision() -> void:
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		if collider.is_in_group("player") and collider.has_method("die"):
-			collider.die()
+		if collider.is_in_group("player") and collider.has_method("hit"):
+			collider.hit()
 
-func die() -> void:
-	enemy_died.emit()
-	queue_free()
+func hit() -> void:
+	life -= 10
+	apply_recoil()
+	if life <= 0:
+		enemy_died.emit()
+		queue_free()
+
+func apply_recoil() -> void:
+	if recoil_tween and recoil_tween.is_valid():
+		recoil_tween.kill()
+	
+	recoil_tween = create_tween()
+	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

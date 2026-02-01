@@ -1,11 +1,16 @@
 extends CharacterBody2D
 
 @export var speed: float = 30
-@export var cooldown_time: float = 0.2
+@export var cooldown_time: float = 0.1
 @export var controller_deadzone: float = 0.1
 @export var velocity_threshold: float = 0.1
 @export var sprite_speed_scale: float = 2.0
 @export var run_speed_factor: float = 2.1
+@export var spread_threshold: int = 200
+@export var spread_per_shot: int = 1
+@export var max_spread: int = 5
+@export var recoil_distance: float = 3.0
+@export var recoil_duration: float = 0.02
 
 var aim_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
@@ -14,11 +19,17 @@ var controller_available: bool = false
 var using_controller: bool = false
 var observed_stick_max: float = 0.7
 var player_speed_factor: float = 1.0
+var last_shot_time: int = 0
+var consecutive_shots: int = 0
+var recoil_tween: Tween
 
-const LASER_SCENE: PackedScene = preload("res://weapons/laser.tscn")
+const BULLET_SCENE: PackedScene = preload("res://weapons/bullet.tscn")
+const MUZZLE_FLASH_SCENE: PackedScene = preload("res://weapons/muzzle_flash.tscn")
+const SHELL_SCENE: PackedScene = preload("res://weapons/shell.tscn")
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_cooldown: Timer = $FireCooldown
+@onready var muzzle_point: Marker2D = $AnimatedSprite2D/MuzzlePoint
 
 signal game_over
 
@@ -69,14 +80,15 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("player_run"):
 			player_speed_factor = 1.0
 			sprite.speed_scale = 1.0
-		
-		if Input.is_action_pressed("shoot"):
-			fire()
 
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
 	get_input()
+	
+	if Input.is_action_pressed("shoot"):
+		fire()
+		
 	update_animation()
 	move_and_slide()
 
@@ -91,7 +103,7 @@ func update_animation() -> void:
 	else:
 		sprite.play("idle")
 
-func die() -> void:
+func hit() -> void:
 	if is_dead:
 		return
 	is_dead = true
@@ -103,11 +115,11 @@ func fire() -> void:
 	
 	can_fire = false
 	
-	var laser = LASER_SCENE.instantiate()
-	laser.direction = aim_direction
-	laser.global_position = global_position
-	laser.rotation = rotation - PI
-	get_parent().add_child(laser)
+	add_muzzle_flash()
+	add_bullet()
+	add_shell()
+	apply_recoil()
+	
 	fire_cooldown.start(cooldown_time)
 
 func _on_fire_cooldown_timeout() -> void:
@@ -117,3 +129,46 @@ func _on_joy_connection_changed(_device_id: int, _connected: bool) -> void:
 	controller_available = Input.get_connected_joypads().size() > 0
 	if not controller_available:
 		using_controller = false
+
+func add_muzzle_flash() -> void:
+	var muzzle_flash = MUZZLE_FLASH_SCENE.instantiate()
+	var offset_distance = muzzle_flash.get_length() / 2.0
+	muzzle_flash.global_position = muzzle_point.global_position + (aim_direction * offset_distance)
+	muzzle_flash.rotation = self.rotation + PI
+	get_parent().add_child(muzzle_flash)
+
+func add_bullet() -> void:
+	var current_time = Time.get_ticks_msec()
+	var time_since_last = current_time - last_shot_time
+	
+	if time_since_last < spread_threshold:
+		consecutive_shots += 1
+	else:
+		consecutive_shots = 0
+	
+	var spread_angle = min(consecutive_shots * spread_per_shot, max_spread)
+	var random_offset = randi_range(-spread_angle, spread_angle)
+	
+	var bullet = BULLET_SCENE.instantiate()
+	bullet.direction = aim_direction.rotated(deg_to_rad(random_offset))
+	last_shot_time = current_time
+	bullet.global_position = muzzle_point.global_position
+	bullet.rotation = rotation - PI
+	get_parent().add_child(bullet)
+
+func add_shell() -> void:
+	var shell = SHELL_SCENE.instantiate()
+	shell.direction = aim_direction.rotated(PI/2)
+	shell.rotation = PI
+	
+	var ejection_offset = 10.0
+	shell.global_position = muzzle_point.global_position - (aim_direction * ejection_offset)
+	get_parent().add_child(shell)
+
+func apply_recoil() -> void:
+	if recoil_tween and recoil_tween.is_valid():
+		recoil_tween.kill()
+	
+	recoil_tween = create_tween()
+	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

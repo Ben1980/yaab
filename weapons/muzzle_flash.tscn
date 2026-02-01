@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://tdnqqs4xrnhf"]
+
+[ext_resource type="Script" uid="uid://56l5re6p6aej" path="res://weapons/muzzle_flash.gd" id="1_q1urm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nw807"]
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+
+[node name="MuzzleFlash" type="GPUParticles2D" unique_id=1920241236]
+z_index = 2
+emitting = false
+lifetime = 0.05
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_nw807")
+script = ExtResource("1_q1urm")
+muzzle_flash_pattern = Array[int]([3, 5, 5, 7, 7, 9, 9, 11, 11, 11, 9, 9, 7, 7, 5, 5, 3, 3, 1])
+bright_threshold = 0.8
+medium_threshold = 0.65
+
+[connection signal="finished" from="." to="." method="_on_finished"]
