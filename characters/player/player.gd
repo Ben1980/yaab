@@ -9,6 +9,8 @@ extends CharacterBody2D
 @export var spread_threshold: int = 200
 @export var spread_per_shot: int = 1
 @export var max_spread: int = 5
+@export var recoil_distance: float = 3.0
+@export var recoil_duration: float = 0.02
 
 var aim_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
@@ -19,6 +21,7 @@ var observed_stick_max: float = 0.7
 var player_speed_factor: float = 1.0
 var last_shot_time: int = 0
 var consecutive_shots: int = 0
+var recoil_tween: Tween
 
 const BULLET_SCENE: PackedScene = preload("res://weapons/bullet.tscn")
 const MUZZLE_FLASH_SCENE: PackedScene = preload("res://weapons/muzzle_flash.tscn")
@@ -115,6 +118,7 @@ func fire() -> void:
 	add_muzzle_flash()
 	add_bullet()
 	add_shell()
+	apply_recoil()
 	
 	fire_cooldown.start(cooldown_time)
 
@@ -160,3 +164,11 @@ func add_shell() -> void:
 	var ejection_offset = 10.0
 	shell.global_position = muzzle_point.global_position - (aim_direction * ejection_offset)
 	get_parent().add_child(shell)
+
+func apply_recoil() -> void:
+	if recoil_tween and recoil_tween.is_valid():
+		recoil_tween.kill()
+	
+	recoil_tween = create_tween()
+	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
