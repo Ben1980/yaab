@@ -7,10 +7,23 @@ direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
 
+[sub_resource type="Gradient" id="Gradient_ua64h"]
+offsets = PackedFloat32Array(0, 0.13690476, 1)
+colors = PackedColorArray(1.5720325, 1.5720325, 1.5720325, 1, 1.353256, 1.353256, 1.353256, 0.86300004, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qoyx"]
+gradient = SubResource("Gradient_ua64h")
+width = 256
+height = 256
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.15, 0.15)
+
 [node name="MuzzleFlash" type="GPUParticles2D" unique_id=1920241236]
 z_index = 2
 emitting = false
-lifetime = 0.05
+lifetime = 0.15000000000000002
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_nw807")
@@ -18,5 +31,15 @@ script = ExtResource("1_q1urm")
 muzzle_flash_pattern = Array[int]([3, 5, 5, 7, 7, 9, 9, 11, 11, 11, 9, 9, 7, 7, 5, 5, 3, 3, 1])
 bright_threshold = 0.8
 medium_threshold = 0.65
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=416900374]
+color = Color(1.572, 1.415, 1.076, 1)
+energy = 3.0
+shadow_enabled = true
+shadow_color = Color(0.09803922, 0.09803922, 0.09803922, 0.8)
+shadow_filter = 2
+shadow_filter_smooth = 3.0
+texture = SubResource("GradientTexture2D_5qoyx")
+texture_scale = 0.75
 
 [connection signal="finished" from="." to="." method="_on_finished"]

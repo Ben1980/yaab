@@ -111,7 +111,7 @@ texture_region_size = Vector2i(128, 128)
 
 [sub_resource type="TileSet" id="TileSet_safpt"]
 tile_size = Vector2i(128, 128)
-occlusion_layer_0/light_mask = 1
+occlusion_layer_0/light_mask = 3
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5mrsh")
 
@@ -124,6 +124,11 @@ base_font = ExtResource("4_5mrsh")
 
 [sub_resource type="FontVariation" id="FontVariation_vnv7o"]
 base_font = ExtResource("4_5mrsh")
+
+[sub_resource type="Environment" id="Environment_5mrsh"]
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_blend_mode = 2
 
 [node name="Level" type="Node2D" unique_id=1848955298]
 script = ExtResource("1_oi3di")
@@ -214,6 +219,9 @@ text = "Quit"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=463521279]
 color = Color(0, 0, 0, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=84406648]
+environment = SubResource("Environment_5mrsh")
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="pressed" from="GameOverLayer/GameOverScreen/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

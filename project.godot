@@ -19,12 +19,20 @@ run/main_scene="uid://8c68pgr3marj"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://ddov38xsjv61s"
 
+[autoload]
+
+DebugMenu="*uid://cggqb75a8w8r"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=3
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
 
 [input]
 
@@ -85,4 +93,5 @@ player_run={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/shadow_atlas/size=4096
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
