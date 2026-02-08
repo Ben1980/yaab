@@ -126,9 +126,10 @@ base_font = ExtResource("4_5mrsh")
 base_font = ExtResource("4_5mrsh")
 
 [sub_resource type="Environment" id="Environment_5mrsh"]
+background_mode = 3
 glow_enabled = true
 glow_levels/1 = 1.0
-glow_blend_mode = 2
+glow_blend_mode = 0
 
 [node name="Level" type="Node2D" unique_id=1848955298]
 script = ExtResource("1_oi3di")
