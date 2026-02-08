@@ -1,14 +1,20 @@
 extends GPUParticles2D
 
 @export var muzzle_flash_pattern: Array[int] = []
-@export var bright_color: Color = Color(3.0, 3.0, 2.5, 1.0)
-@export var medium_color: Color = Color(2.0, 1.5, 0.5, 1.0)
-@export var dark_color: Color = Color(1.5, 0.5, 0.2, 0.8)
+@export var bright_color: Color = Color(1.0, 1.0, 0.5, 1.0)
+@export var medium_color: Color = Color(1.0, 0.5, 0.5, 1.0)
+@export var dark_color: Color = Color(1.0, 0.5, 0.2, 0.8)
 @export var bright_threshold: float
 @export var medium_threshold: float
 
+@onready var light: PointLight2D = $PointLight2D
+
 func _ready() -> void:
 	self.texture = create_flame_texture()
+	
+	var tween = create_tween()
+	tween.tween_property(light, "energy", 0, lifetime).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	
 	emitting = true
 
 func _on_finished() -> void:
