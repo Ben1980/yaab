@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://eabnhq7msque" path="res://characters/enemies/enemy.gd" id="1_qi2p4"]
 [ext_resource type="Texture2D" uid="uid://ct7ct26rv5umk" path="res://characters/enemies/sprites/alien_walk_cycle.png" id="2_4gyqm"]
+[ext_resource type="AudioStream" uid="uid://b0hppv87ss3mn" path="res://characters/enemies/sounds/ping.wav" id="3_6lc82"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
 atlas = ExtResource("2_4gyqm")
@@ -157,3 +158,12 @@ polygon = PackedVector2Array(0, -25, 6, -27, 12, -24, 18, -16, 21, -7, 16, 10, 1
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1304358147]
 occluder = SubResource("OccluderPolygon2D_jfoax")
 occluder_light_mask = 2
+
+[node name="Ping" type="AudioStreamPlayer2D" parent="." unique_id=2009140618]
+stream = ExtResource("3_6lc82")
+max_distance = 400.0
+bus = &"Ping"
+
+[node name="PingTimer" type="Timer" parent="." unique_id=491617435]
+
+[connection signal="timeout" from="PingTimer" to="." method="_on_ping_timer_timeout"]
