@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://dlkqk01pyg2xj" path="res://characters/player/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://brne38m67bph0" path="res://characters/player/sprites/player.png" id="2_xxgcw"]
 [ext_resource type="Texture2D" uid="uid://cma608ovn201y" path="res://characters/player/sprites/flash_light.png" id="3_exd8k"]
+[ext_resource type="AudioStream" uid="uid://bh5yiixt2wqlo" path="res://characters/player/sounds/heartbeat.wav" id="4_5dc8e"]
+[ext_resource type="AudioStream" uid="uid://cotwf5vxwjjdv" path="res://characters/player/sounds/flatline.wav" id="5_ixbpm"]
+[ext_resource type="AudioStream" uid="uid://dqqc0v3itgs7m" path="res://weapons/sounds/gunshot.wav" id="6_c6leb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exd8k"]
 atlas = ExtResource("2_xxgcw")
@@ -156,6 +159,20 @@ z_index = 2
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_i3pqv")
+speed = null
+cooldown_time = null
+controller_deadzone = null
+velocity_threshold = null
+sprite_speed_scale = null
+run_speed_factor = null
+spread_threshold = null
+spread_per_shot = null
+max_spread = null
+recoil_distance = null
+recoil_duration = null
+min_heartbeat_interval = null
+max_heartbeat_interval = null
+max_enemy_distance = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1318349671]
 sprite_frames = SubResource("SpriteFrames_hqtel")
@@ -202,4 +219,21 @@ texture = ExtResource("3_exd8k")
 offset = Vector2(0, -128)
 texture_scale = 0.5
 
+[node name="Heartbeat" type="AudioStreamPlayer" parent="." unique_id=746042723]
+stream = ExtResource("4_5dc8e")
+autoplay = true
+bus = &"Heartbeat"
+
+[node name="HeatbeatTimer" type="Timer" parent="." unique_id=1019211467]
+autostart = true
+
+[node name="Flatline" type="AudioStreamPlayer" parent="." unique_id=1281002796]
+stream = ExtResource("5_ixbpm")
+bus = &"Flatline"
+
+[node name="Gunshot" type="AudioStreamPlayer" parent="." unique_id=1607215463]
+stream = ExtResource("6_c6leb")
+bus = &"Gunshot"
+
 [connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]
+[connection signal="timeout" from="HeatbeatTimer" to="." method="_on_heatbeat_timer_timeout"]

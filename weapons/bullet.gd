@@ -72,6 +72,15 @@ func wall_impact(wall_normal: Vector2) -> void:
 	get_parent().add_child(wall_impact_debris_instance)
 	
 	shade_wall()
+	
+	var impact_sound = AudioStreamPlayer2D.new()
+	impact_sound.finished.connect(impact_sound.queue_free)
+	impact_sound.stream = preload("res://weapons/sounds/impact_1.wav")
+	impact_sound.bus = "Bullet Wall Impact"
+	impact_sound.max_distance = 400.0
+	impact_sound.global_position = wall_impact_debris_instance.global_position
+	get_parent().add_child(impact_sound)
+	impact_sound.play()
 
 func enemy_impact() -> void:
 	var enemy_impact_instance = BULLET_IMPACT_ENEMY_SCENE.instantiate()

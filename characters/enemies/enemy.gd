@@ -2,14 +2,18 @@ extends CharacterBody2D
 
 @export var life: int = 100
 @export var patrol_speed: float = 30.0
-@export var chase_speed: float = 90.0
-@export var vision_range: float = 250.0
+@export var chase_speed: float = 100.0
+@export var vision_range: float = 300.0
 @export var direction_change_time: float = 2.0 
 @export var velocity_threshold: float = 1.0
 @export var rotation_speed: float = 10.0
 @export var sprite_speed_scale: float = 2.0
 @export var recoil_distance: float = 3.0
 @export var recoil_duration: float = 0.02
+@export var min_ping_interval: float = 0.1
+@export var max_ping_interval: float = 4.0
+@export var min_ping_pitch: float = 0.5
+@export var max_ping_pitch: float = 1.5
 
 enum State { PATROL, CHASE }
 var current_state: State = State.PATROL
@@ -19,13 +23,20 @@ var patrol_timer: float = 0.0
 var last_known_player_pos: Vector2 = Vector2.ZERO
 var query: PhysicsRayQueryParameters2D = null
 var recoil_tween: Tween
+var is_pinging: bool = false
+var is_closest_to_player: bool = false 
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var ping: AudioStreamPlayer2D = $Ping
+@onready var ping_timer: Timer = $PingTimer
+@onready var growl: AudioStreamPlayer2D = $Growl
+@onready var growl_timer: Timer = $GrowlTimer
 
 signal enemy_died
 
 func _ready() -> void:
 	query = PhysicsRayQueryParameters2D.new()
+	growl_timer.wait_time = randf_range(5.0, 30.0)
 	
 	add_to_group("enemy")
 	call_deferred("player_setup")
@@ -56,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	update_animation()
 	update_facing(delta)
 	check_player_collision()
+	pinging()
 
 func player_setup() -> void:
 	await get_tree().physics_frame
@@ -134,6 +146,7 @@ func hit() -> void:
 	life -= 10
 	apply_recoil()
 	if life <= 0:
+		growl_timer.stop()
 		enemy_died.emit()
 		queue_free()
 
@@ -144,3 +157,26 @@ func apply_recoil() -> void:
 	recoil_tween = create_tween()
 	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func pinging() -> void:
+	var distance_to_player = global_position.distance_to(player.global_position)
+	var should_ping = distance_to_player <= ping.max_distance and is_closest_to_player
+	
+	if should_ping and not is_pinging:
+		ping_timer.start()
+		is_pinging = true
+	elif not should_ping and is_pinging:
+		ping_timer.stop()
+		is_pinging = false
+	
+	if is_pinging:
+		var ratio = clampf(distance_to_player / ping.max_distance, 0.0, 1.0)
+		ping_timer.wait_time = lerpf(min_ping_interval, max_ping_interval, ratio)
+		ping.pitch_scale = lerpf(max_ping_pitch, min_ping_pitch, ratio)
+
+func _on_ping_timer_timeout() -> void:
+	ping.play()
+
+func _on_growl_timer_timeout() -> void:
+	growl.play()
+	growl_timer.wait_time = randf_range(5.0, 30.0)

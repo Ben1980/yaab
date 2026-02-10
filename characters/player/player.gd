@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 30
+@export var speed: float = 90
 @export var cooldown_time: float = 0.1
 @export var controller_deadzone: float = 0.1
 @export var velocity_threshold: float = 0.1
@@ -11,6 +11,9 @@ extends CharacterBody2D
 @export var max_spread: int = 5
 @export var recoil_distance: float = 3.0
 @export var recoil_duration: float = 0.02
+@export var min_heartbeat_interval: float = 0.05
+@export var max_heartbeat_interval: float = 1.0
+@export var max_enemy_distance: float = 400.0
 
 var aim_direction: Vector2 = Vector2.RIGHT
 var is_dead: bool = false
@@ -30,6 +33,10 @@ const SHELL_SCENE: PackedScene = preload("res://weapons/shell.tscn")
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var muzzle_point: Marker2D = $AnimatedSprite2D/MuzzlePoint
+@onready var heartbeat: AudioStreamPlayer = $Heartbeat
+@onready var heartbeat_timer: Timer = $HeatbeatTimer
+@onready var flatline: AudioStreamPlayer = $Flatline
+@onready var gunshot: AudioStreamPlayer = $Gunshot
 
 signal game_over
 
@@ -88,7 +95,17 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot"):
 		fire()
-		
+	
+	var closest_distance = INF
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		if is_instance_valid(enemy):
+			var distance_to_player = enemy.position.distance_to(global_position)
+			if distance_to_player < closest_distance:
+				closest_distance = distance_to_player
+				var ratio = clampf(distance_to_player / max_enemy_distance, 0.0, 1.0)
+				heartbeat_timer.wait_time = lerpf(min_heartbeat_interval, max_heartbeat_interval, ratio)
+			
 	update_animation()
 	move_and_slide()
 
@@ -108,6 +125,12 @@ func hit() -> void:
 		return
 	is_dead = true
 	game_over.emit()
+	
+	flatline.play()
+	var flatline_tween = get_tree().create_tween()
+	flatline_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	flatline_tween.tween_property(flatline, "volume_db", -80, 8).set_trans(Tween.TRANS_LINEAR)
+	flatline_tween.tween_callback(flatline.stop)
 
 func fire() -> void:
 	if not can_fire:
@@ -119,6 +142,7 @@ func fire() -> void:
 	add_bullet()
 	add_shell()
 	apply_recoil()
+	gunshot.play()
 	
 	fire_cooldown.start(cooldown_time)
 
@@ -172,3 +196,6 @@ func apply_recoil() -> void:
 	recoil_tween = create_tween()
 	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func _on_heatbeat_timer_timeout() -> void:
+	heartbeat.play()
