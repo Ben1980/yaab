@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var enemy_count: int = 5
+@export var enemy_count: int = 30
 @export var color_transition_duration: float = 0.75
-@export var safe_radius: float = 250
+@export var safe_radius: float = 400
 
 var query: PhysicsPointQueryParameters2D = null
 
@@ -17,6 +17,26 @@ const ENEMY_SCENE: PackedScene = preload("res://characters/enemies/enemy.tscn")
 func _ready() -> void:
 	query = PhysicsPointQueryParameters2D.new()
 	call_deferred("spawn_enemies")
+
+func _physics_process(_delta: float) -> void:
+	if not is_instance_valid(player):
+		return
+	
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	var closest_enemy = null
+	var closest_distance = INF
+	
+	for enemy in enemies:
+		if is_instance_valid(enemy):
+			var distance_to_player = enemy.position.distance_to(player.global_position)
+			
+			if distance_to_player < closest_distance:
+				closest_distance = distance_to_player
+				closest_enemy = enemy
+	
+	for enemy in enemies:
+		if is_instance_valid(enemy):
+			enemy.is_closest_to_player = (enemy == closest_enemy)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
