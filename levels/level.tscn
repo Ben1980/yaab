@@ -142,7 +142,6 @@ tile_set = SubResource("TileSet_safpt")
 
 [node name="Player" parent="." unique_id=1508357578 instance=ExtResource("2_vonw3")]
 position = Vector2(576, 447)
-speed = 90.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1453965977]
 zoom = Vector2(2, 2)
