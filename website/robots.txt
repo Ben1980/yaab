@@ -1,5 +1,5 @@
-# robots.txt for yaab.io
-# https://yaab.io/
+# robots.txt for yaab.online
+# https://yaab.online/
 
 # Allow all standard search engine crawlers
 User-agent: *
@@ -82,4 +82,4 @@ User-agent: SemrushBot
 Disallow: /
 
 # Sitemap location
-Sitemap: https://yaab.io/sitemap.xml
+Sitemap: https://yaab.online/sitemap.xml

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 90
 @export var cooldown_time: float = 0.1
-@export var controller_deadzone: float = 0.1
+@export var controller_deadzone: float = 0.2
 @export var velocity_threshold: float = 0.1
 @export var sprite_speed_scale: float = 2.0
 @export var run_speed_factor: float = 2.1
@@ -34,7 +34,7 @@ const SHELL_SCENE: PackedScene = preload("res://weapons/shell.tscn")
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var muzzle_point: Marker2D = $AnimatedSprite2D/MuzzlePoint
 @onready var heartbeat: AudioStreamPlayer = $Heartbeat
-@onready var heartbeat_timer: Timer = $HeatbeatTimer
+@onready var heartbeat_timer: Timer = $HeartbeatTimer
 @onready var flatline: AudioStreamPlayer = $Flatline
 @onready var gunshot: AudioStreamPlayer = $Gunshot
 
@@ -50,12 +50,16 @@ func get_input() -> void:
 				rotation = aim_direction.angle() + PI/2
 		
 		if not using_controller:
-			look_at(get_global_mouse_position())
+			var mouse_position = get_global_mouse_position()
+			look_at(mouse_position)
 			rotation += PI/2
-			aim_direction = (get_global_mouse_position() - global_position).normalized()
+			aim_direction = (mouse_position - global_position).normalized()
+		
+		var move_input: Vector2
+		var move_speed: float
 		
 		if using_controller:
-			var move_input = Vector2(
+			move_input = Vector2(
 				Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
 				Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 			)
@@ -64,15 +68,25 @@ func get_input() -> void:
 			if raw_length > observed_stick_max:
 				observed_stick_max = raw_length
 			
-			var speed_factor = clamp(raw_length / observed_stick_max, 0.0, 1.0) * player_speed_factor
-			
 			if raw_length > controller_deadzone:
-				velocity = aim_direction * speed_factor * speed
+				move_speed = clamp(raw_length / observed_stick_max, 0.0, 1.0) * player_speed_factor * speed
 			else:
-				velocity = Vector2.ZERO
+				move_speed = 0.0
 		else:
-			var forward_input = Input.get_axis("move_down", "move_up")
-			velocity = -transform.y.normalized() * forward_input * speed * player_speed_factor
+			move_input = Vector2(
+				Input.get_axis("move_left", "move_right"),
+				Input.get_axis("move_up", "move_down")
+			)
+			if move_input.length() > 0.0:
+				move_speed = speed * player_speed_factor
+			else:
+				move_speed = 0.0
+				
+		if move_speed > 0.0:
+			#var direction = (aim_direction * -move_input.y + aim_direction.rotated(PI/2) * move_input.x).normalized()
+			velocity = move_input.normalized() * move_speed
+		else:
+			velocity = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
 	if not is_dead:
@@ -100,12 +114,15 @@ func _physics_process(_delta: float) -> void:
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
 		if is_instance_valid(enemy):
-			var distance_to_player = enemy.position.distance_to(global_position)
+			var distance_to_player = enemy.global_position.distance_to(global_position)
 			if distance_to_player < closest_distance:
 				closest_distance = distance_to_player
 				var ratio = clampf(distance_to_player / max_enemy_distance, 0.0, 1.0)
 				heartbeat_timer.wait_time = lerpf(min_heartbeat_interval, max_heartbeat_interval, ratio)
-			
+	
+	if is_inf(closest_distance):
+		heartbeat_timer.wait_time = max_heartbeat_interval
+	
 	update_animation()
 	move_and_slide()
 
@@ -123,11 +140,14 @@ func update_animation() -> void:
 func hit() -> void:
 	if is_dead:
 		return
+	
+	player_speed_factor = 1.0
+	sprite.speed_scale = 1.0
 	is_dead = true
 	game_over.emit()
 	
 	flatline.play()
-	var flatline_tween = get_tree().create_tween()
+	var flatline_tween = create_tween()
 	flatline_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	flatline_tween.tween_property(flatline, "volume_db", -80, 8).set_trans(Tween.TRANS_LINEAR)
 	flatline_tween.tween_callback(flatline.stop)
@@ -197,5 +217,5 @@ func apply_recoil() -> void:
 	recoil_tween.tween_property(sprite, "position", Vector2(0, recoil_distance), recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	recoil_tween.tween_property(sprite, "position", Vector2.ZERO, recoil_duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-func _on_heatbeat_timer_timeout() -> void:
+func _on_heartbeat_timer_timeout() -> void:
 	heartbeat.play()
